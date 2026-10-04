@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trio Travel Company | Travel Biz Boss task lists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F7F8; --surface:#FFFFFF; --ink:#16243A; --muted:#566577;
+  --rule:#D3DCE2; --lagoon:#1F7A8C; --lagoon-soft:#DCEEF1;
+  --sun:#B7861A; --sun-soft:#FBF1D9; --plum:#6B4E8C; --plum-soft:#EEE7F5;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body:"Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
+    --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
+    --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
+  --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
+  --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--lagoon)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--lagoon);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
+
+/* Hero */
+header{padding:4.5rem 0 3rem}
+.org{font-weight:600;color:var(--muted);margin:0 0 1rem}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;letter-spacing:-.02em;max-width:16ch}
+.lede{max-width:58ch;color:var(--muted);font-size:1.15rem;margin:1.25rem 0 0}
+.wip{display:inline-block;margin-top:1.5rem;padding:.35rem .8rem;border:1.5px dashed var(--sun);color:var(--sun);border-radius:999px;font-weight:600;font-size:.9rem}
+
+/* Route map: the memorable element */
+.route{margin:3rem 0 0;overflow-x:auto;padding-bottom:.5rem}
+.route ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(8.5rem,1fr));min-width:52rem;position:relative}
+.route ol::before{content:"";position:absolute;left:1.1rem;right:calc(100%/6 - 1.1rem);top:1.05rem;height:4px;background:var(--lagoon);border-radius:2px}
+.route ol::after{content:"";position:absolute;right:1.1rem;left:calc(100% - 100%/6 + 1.1rem);top:1.05rem;height:0;border-top:4px dashed var(--rule)}
+.route li{position:relative;padding-right:1rem}
+.route a{display:block;text-decoration:none;color:var(--ink)}
+.stop{display:grid;place-items:center;width:2.35rem;height:2.35rem;border-radius:50%;background:var(--surface);border:4px solid var(--lagoon);font-family:var(--display);font-weight:700;font-size:.95rem;position:relative;z-index:1}
+.route li.future .stop{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.route .name{display:block;margin-top:.7rem;font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.2}
+.route .sub{display:block;color:var(--muted);font-size:.88rem;margin-top:.2rem}
+.route a:hover .name{color:var(--lagoon)}
+
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:2.5rem 0 0;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--rule);border-radius:10px;font-size:.95rem}
+.legend span{display:inline-flex;align-items:center;gap:.5rem}
+.tag{display:inline-block;font-size:.8rem;font-weight:600;padding:.12rem .55rem;border-radius:5px;white-space:nowrap}
+.t-manual{background:var(--lagoon-soft);color:var(--lagoon)}
+.t-list{background:var(--plum-soft);color:var(--plum)}
+.t-auto{background:var(--sun-soft);color:var(--sun);border:1px dashed var(--sun)}
+
+/* Stages */
+main{padding:2rem 0 4rem}
+.stage{display:grid;grid-template-columns:4.5rem 1fr;gap:0 1.5rem;position:relative;padding-bottom:3.5rem}
+.stage::before{content:"";position:absolute;left:calc(2.25rem - 2px);top:3rem;bottom:0;width:4px;background:var(--lagoon);opacity:.35;border-radius:2px}
+.stage:last-of-type::before{background:none;border-left:4px dashed var(--rule);opacity:1}
+.num{width:4.5rem;height:4.5rem;border-radius:50%;display:grid;place-items:center;background:var(--lagoon);color:var(--paper);font-family:var(--display);font-weight:700;font-size:1.6rem;position:sticky;top:calc(env(safe-area-inset-top,0px) + 1rem)}
+.stage.future .num{background:transparent;color:var(--muted);border:4px dashed var(--muted)}
+.body{min-width:0}
+.body h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:700;padding-top:.6rem}
+.when{color:var(--muted);margin:.4rem 0 1.25rem;max-width:62ch}
+.when strong{color:var(--ink)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:.75rem;max-width:46rem}
+.steps li{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:1rem 1.25rem}
+.steps li.auto{border:1.5px dashed var(--sun)}
+.steps h3{font-size:1.1rem;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem;margin-bottom:.35rem}
+.steps p{margin:.35rem 0 0;max-width:62ch}
+.steps ul{margin:.5rem 0 0;padding-left:1.2rem}
+.steps ul li{background:none;border:0;padding:0;margin:.25rem 0}
+.note{margin:1rem 0 0;max-width:46rem;padding:.9rem 1.15rem;border-left:4px solid var(--lagoon);background:var(--lagoon-soft);border-radius:0 8px 8px 0;font-size:.98rem}
+.note.warn{border-color:var(--sun);background:var(--sun-soft)}
+.kbd{font-weight:600;white-space:nowrap}
+
+/* Migration */
+.migrate{border-top:1px solid var(--rule);padding:3.5rem 0 1rem}
+.migrate h2{font-size:clamp(1.6rem,3.2vw,2.2rem);margin-bottom:.5rem}
+.migrate > p{color:var(--muted);max-width:60ch;margin:0 0 1.5rem}
+.table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:40rem;font-size:.97rem}
+th,td{text-align:left;vertical-align:top;padding:.85rem 1.1rem;border-bottom:1px solid var(--rule)}
+th{font-family:var(--display);font-weight:700;font-size:1rem}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;width:22%}
+
+footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);font-size:.92rem}
+
+@media (max-width:640px){
+  header{padding:3rem 0 2rem}
+  .stage{grid-template-columns:2.75rem 1fr;gap:0 1rem}
+  .num{width:2.75rem;height:2.75rem;font-size:1.1rem}
+  .stage.future .num{border-width:3px}
+  .stage::before{left:calc(1.375rem - 2px);top:2rem}
+  .body h2{padding-top:.15rem}
+}
+@media print{
+  .route{display:none}
+  .num{position:static}
+  body{background:#fff}
+}
+
+.topnav{padding:1.25rem 0 0}
+.topnav a{font-weight:600;text-decoration:none}
+.topnav a:hover{text-decoration:underline}
+.sec{padding:0 0 3.5rem}
+.sec h2{font-size:clamp(1.6rem,3.2vw,2.2rem);margin-bottom:.4rem}
+.sec > p{color:var(--muted);max-width:62ch;margin:0 0 1.5rem}
+.wf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.75rem}
+.wf li{background:var(--surface);border:1px solid var(--rule);border-left:6px solid var(--plum);border-radius:10px;padding:1rem 1.25rem}
+.wf h3{font-size:1.15rem}
+.wf p{margin:.3rem 0 0;color:var(--muted);font-size:.95rem}
+.search{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin:0 0 1.25rem}
+.search input{font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--rule);border-radius:8px;padding:.6rem .9rem;width:min(100%,22rem)}
+.search input:focus-visible{outline:3px solid var(--lagoon);outline-offset:2px;border-color:var(--lagoon)}
+.count{color:var(--muted);font-size:.95rem}
+.lines{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:.6rem}
+.lines li{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.15rem}
+.lines .line{font-family:var(--display);font-weight:700;font-size:1.1rem}
+.lines .aka{color:var(--muted);font-size:.9rem}
+.lines .exact{font-size:.82rem;color:var(--lagoon);margin-top:.35rem}
+.empty{color:var(--muted);display:none}
+</style>
+</head>
+<body>
+<div class="wrap topnav"><a href="./">Back to the customer journey</a></div>
+<header>
+  <div class="wrap">
+    <p class="org">Trio Travel Company</p>
+    <h1>Travel Biz Boss task lists</h1>
+    <p class="lede">The task lists imported into Travefy from Travel Biz Boss, all tagged <strong>tbb</strong>. Use this page to find the right list, then search for its exact name in Travefy and apply it to the trip.</p>
+    <span class="wip">Work in progress: where each list fits in the journey is still being decided</span>
+  </div>
+</header>
+<main class="wrap">
+  <section class="sec" aria-labelledby="wf-h">
+    <h2 id="wf-h">Cruise workflows</h2>
+    <p>Four general cruise lists. The three workflows are split by type of cruise line.</p>
+    <ul class="wf">
+      <li><h3>Cruise Onboarding</h3><p>Exact name: Cruise Onboarding</p></li>
+      <li><h3>Mass market</h3><p>Exact name: Cruise Workflow - Mass Market 3/2/26</p></li>
+      <li><h3>Premium and luxury</h3><p>Exact name: Cruise Workflow - Premium/Lux 3/2/26</p></li>
+      <li><h3>River</h3><p>Exact name: Cruise Workflow - River 3/2/26</p></li>
+    </ul>
+  </section>
+  <section class="sec" aria-labelledby="cl-h">
+    <h2 id="cl-h">Deposit and final balance emails by cruise line</h2>
+    <p>One list per cruise line, 24 in total, for the deposit and final balance emails on a booked cruise.</p>
+    <div class="search">
+      <label for="q" class="count" style="color:var(--ink);font-weight:600">Find a cruise line</label>
+      <input id="q" type="search" placeholder="e.g. Viking or Royal Caribbean" autocomplete="off">
+      <span class="count" id="count" aria-live="polite">24 lists</span>
+    </div>
+    <ul class="lines" id="lines">
+<li data-q="ama amawaterways"><span class="line">AMA</span><span class="aka">AmaWaterways</span><span class="exact">Cruise: AMA Deposit &amp; Final Balance Emails</span></li>
+<li data-q="avalon avalon waterways"><span class="line">Avalon</span><span class="aka">Avalon Waterways</span><span class="exact">Cruise: Avalon Deposit &amp; Final Balance Emails</span></li>
+<li data-q="azamara "><span class="line">Azamara</span><span class="exact">Cruise: Azamara Deposit &amp; Final Balance Emails</span></li>
+<li data-q="carnival "><span class="line">Carnival</span><span class="exact">Cruise: Carnival Deposit &amp; Final Balance Emails</span></li>
+<li data-q="celebrity "><span class="line">Celebrity</span><span class="exact">Cruise: Celebrity Deposit &amp; Final Balance Emails</span></li>
+<li data-q="celestyal "><span class="line">Celestyal</span><span class="exact">Cruise: Celestyal Deposit &amp; Final Balance Emails</span></li>
+<li data-q="cunard "><span class="line">Cunard</span><span class="exact">Cruise: Cunard Deposit &amp; Final Balance Emails</span></li>
+<li data-q="emerald emerald cruises"><span class="line">Emerald</span><span class="aka">Emerald Cruises</span><span class="exact">Cruise: Emerald Deposit &amp; Final Balance Emails</span></li>
+<li data-q="explora "><span class="line">Explora</span><span class="exact">Cruise: Explora Deposit &amp; Final Balance Emails</span></li>
+<li data-q="hal holland america line"><span class="line">HAL</span><span class="aka">Holland America Line</span><span class="exact">Cruise: HAL Deposit &amp; Final Balance Emails</span></li>
+<li data-q="hurtigruten "><span class="line">Hurtigruten</span><span class="exact">Cruise: Hurtigruten Deposit &amp; Final Balance Emails</span></li>
+<li data-q="ncl norwegian cruise line"><span class="line">NCL</span><span class="aka">Norwegian Cruise Line</span><span class="exact">Cruise: NCL Deposit &amp; Final Balance Emails</span></li>
+<li data-q="princess "><span class="line">Princess</span><span class="exact">Cruise: Princess Deposit &amp; Final Balance Emails</span></li>
+<li data-q="rccl royal caribbean"><span class="line">RCCL</span><span class="aka">Royal Caribbean</span><span class="exact">Cruise: RCCL Deposit &amp; Final Balance Emails</span></li>
+<li data-q="regent regent seven seas"><span class="line">Regent</span><span class="aka">Regent Seven Seas</span><span class="exact">Cruise: Regent Deposit &amp; Final Balance Emails</span></li>
+<li data-q="ritz carlton ritz-carlton yacht collection"><span class="line">Ritz Carlton</span><span class="aka">Ritz-Carlton Yacht Collection</span><span class="exact">Cruise: Ritz Carlton Deposit &amp; Final Balance Emails</span></li>
+<li data-q="scenic (river) scenic river cruises"><span class="line">Scenic (River)</span><span class="aka">Scenic river cruises</span><span class="exact">Cruise: Scenic (River) Deposit &amp; Final Balance Emails</span></li>
+<li data-q="seabourn "><span class="line">Seabourn</span><span class="exact">Cruise: Seabourn Deposit &amp; Final Balance Emails</span></li>
+<li data-q="seadream "><span class="line">SeaDream</span><span class="exact">Cruise: SeaDream Deposit &amp; Final Balance Emails</span></li>
+<li data-q="silversea "><span class="line">Silversea</span><span class="exact">Cruise: Silversea Deposit &amp; Final Balance Emails</span></li>
+<li data-q="tauck "><span class="line">Tauck</span><span class="exact">Cruise: Tauck Deposit &amp; Final Balance Emails</span></li>
+<li data-q="uniworld "><span class="line">Uniworld</span><span class="exact">Cruise: Uniworld Deposit &amp; Final Balance Emails</span></li>
+<li data-q="viking "><span class="line">Viking</span><span class="exact">Cruise: Viking Deposit &amp; Final Balance Emails</span></li>
+<li data-q="windstar "><span class="line">Windstar</span><span class="exact">Cruise: Windstar Deposit &amp; Final Balance Emails</span></li>
+    </ul>
+    <p class="empty" id="empty">No cruise line matches that search. Try part of the name, like "sea" or "river".</p>
+  </section>
+</main>
+<footer><div class="wrap">Trio Travel Company internal process guide. Last updated October 2026. This is a living document and will change as the remaining workflows are reviewed.</div></footer>
+<script>
+(function(){
+  var q=document.getElementById('q'),items=[].slice.call(document.querySelectorAll('#lines li')),c=document.getElementById('count'),e=document.getElementById('empty');
+  q.addEventListener('input',function(){
+    var v=q.value.trim().toLowerCase(),n=0;
+    items.forEach(function(li){var m=!v||li.dataset.q.indexOf(v)>-1;li.hidden=!m;if(m)n++;});
+    c.textContent=n+(n===1?' list':' lists');e.style.display=n?'none':'block';
+  });
+})();
+</script>
+</body>
+</html>
