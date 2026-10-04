@@ -210,16 +210,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
       <ol class="steps">
         <li>
           <h3>Proposal sent - Send Traveler profile form <span class="tag t-manual">Task</span></h3>
-          <p>Once the proposal has gone out, send the client the traveler profile form.</p>
-        </li>
-        <li class="auto">
-          <h3>Automatic Form - TTC Credit Card Authorization Form <span class="tag t-auto">Automation</span></h3>
-          <p class="trig"><strong>Inactive.</strong> The default trigger in Travefy is 1 day before itinerary start date. Dana either picks a fixed date to send or chooses Send Now.</p>
-          <p>Sends the credit card authorization form.</p>
-        </li>
-        <li>
-          <h3>Client confirms trip - Send cc authorization form <span class="tag t-manual">Task</span></h3>
-          <p>When the client confirms the trip, send the credit card authorization form above.</p>
+          <p>Once the proposal has gone out, send the client the traveler profile form (the automation below).</p>
         </li>
         <li class="auto">
           <h3>Automatic Form - TTC Traveler Information Form with Passport Upload <span class="tag t-auto">Automation</span></h3>
@@ -229,13 +220,22 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
           <h3>Special occassions or medical requirements? <span class="tag t-manual">Task</span></h3>
           <p>Check whether the trip involves a special occasion or any medical requirements.</p>
         </li>
+        <li>
+          <h3>Client confirms trip - Send cc authorization form <span class="tag t-manual">Task</span></h3>
+          <p>When the client confirms the trip, send the credit card authorization form below.</p>
+        </li>
         <li class="auto">
-          <h3>Automatic Email Message - Preparing for Your Journey: Entry &amp; Travel Requirements <span class="tag t-auto">Automation</span></h3>
-          <p>The entry and travel requirements email. The client opens the Sherpa link in it to check what their destination requires, which puts some of that responsibility in their hands.</p>
+          <h3>Automatic Form - TTC Credit Card Authorization Form <span class="tag t-auto">Automation</span></h3>
+          <p class="trig"><strong>Inactive.</strong> The default trigger in Travefy is 1 day before itinerary start date. Dana either picks a fixed date to send or chooses Send Now.</p>
+          <p>Sends the credit card authorization form.</p>
         </li>
         <li>
           <h3>Client confirms trip - Send entry &amp; visa email (if applicable) <span class="tag t-manual">Task</span></h3>
-          <p>Dana decides whether to send the email above, for example on an FIT trip or a cruise.</p>
+          <p>Dana decides whether to send the email below, for example on an FIT trip or a cruise.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Preparing for Your Journey: Entry &amp; Travel Requirements <span class="tag t-auto">Automation</span></h3>
+          <p>The entry and travel requirements email. The client opens the Sherpa link in it to check what their destination requires, which puts some of that responsibility in their hands.</p>
         </li>
         <li>
           <h3>Move trip to BOOKED <span class="tag t-manual">Task</span></h3>
