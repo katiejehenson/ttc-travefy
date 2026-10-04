@@ -93,6 +93,8 @@ main{padding:2rem 0 4rem}
 .migrate{border-top:1px solid var(--rule);padding:3.5rem 0 1rem}
 .migrate h2{font-size:clamp(1.6rem,3.2vw,2.2rem);margin-bottom:.5rem}
 .migrate > p{color:var(--muted);max-width:60ch;margin:0 0 1.5rem}
+.tbb-link{display:inline-block;font-weight:600;padding:.6rem 1.1rem;border:2px solid var(--lagoon);border-radius:8px;text-decoration:none}
+.tbb-link:hover{background:var(--lagoon-soft)}
 .table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;min-width:40rem;font-size:.97rem}
 th,td{text-align:left;vertical-align:top;padding:.85rem 1.1rem;border-bottom:1px solid var(--rule)}
@@ -125,6 +127,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
     <h1>From first inquiry to welcome home</h1>
     <p class="lede">How a client moves through our process in Travefy. Each stop shows what Dana does, which task list to apply, and which automations are available. The workflows we used in Tern have been reviewed and rebuilt here in a lighter form.</p>
     <span class="wip">Work in progress: post-travel automations are still under review</span>
+    <p style="margin:1rem 0 0"><a href="tbb.html" style="font-weight:600">Travel Biz Boss task lists</a></p>
 
     <nav class="route" aria-label="Journey stops">
       <ol>
@@ -280,6 +283,13 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         </tbody>
       </table>
     </div>
+  </section>
+
+
+  <section class="migrate" id="tbb" aria-labelledby="tbb-h">
+    <h2 id="tbb-h">Travel Biz Boss task lists</h2>
+    <p>Task lists from Travel Biz Boss have been imported into Travefy under the tbb tag. They cover cruises: one onboarding list, three cruise workflows by type of line (mass market, premium and luxury, river), and deposit and final balance email lists for 24 cruise lines. Where each one fits in the journey above is still being decided.</p>
+    <p><a class="tbb-link" href="tbb.html">See all Travel Biz Boss task lists</a></p>
   </section>
 
 </main>
