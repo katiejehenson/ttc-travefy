@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trio Travel Company | Customer journey in Travefy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F7F8; --surface:#FFFFFF; --ink:#16243A; --muted:#566577;
+  --rule:#D3DCE2; --lagoon:#1F7A8C; --lagoon-soft:#DCEEF1;
+  --sun:#B7861A; --sun-soft:#FBF1D9; --plum:#6B4E8C; --plum-soft:#EEE7F5;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body:"Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
+    --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
+    --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
+  --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
+  --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--lagoon)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--lagoon);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
+
+/* Hero */
+header{padding:4.5rem 0 3rem}
+.org{font-weight:600;color:var(--muted);margin:0 0 1rem}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;letter-spacing:-.02em;max-width:16ch}
+.lede{max-width:58ch;color:var(--muted);font-size:1.15rem;margin:1.25rem 0 0}
+.wip{display:inline-block;margin-top:1.5rem;padding:.35rem .8rem;border:1.5px dashed var(--sun);color:var(--sun);border-radius:999px;font-weight:600;font-size:.9rem}
+
+/* Route map: the memorable element */
+.route{margin:3rem 0 0;overflow-x:auto;padding-bottom:.5rem}
+.route ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(8.5rem,1fr));min-width:52rem;position:relative}
+.route ol::before{content:"";position:absolute;left:1.1rem;right:calc(100%/6 - 1.1rem);top:1.05rem;height:4px;background:var(--lagoon);border-radius:2px}
+.route ol::after{content:"";position:absolute;right:1.1rem;left:calc(100% - 100%/6 + 1.1rem);top:1.05rem;height:0;border-top:4px dashed var(--rule)}
+.route li{position:relative;padding-right:1rem}
+.route a{display:block;text-decoration:none;color:var(--ink)}
+.stop{display:grid;place-items:center;width:2.35rem;height:2.35rem;border-radius:50%;background:var(--surface);border:4px solid var(--lagoon);font-family:var(--display);font-weight:700;font-size:.95rem;position:relative;z-index:1}
+.route li.future .stop{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.route .name{display:block;margin-top:.7rem;font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.2}
+.route .sub{display:block;color:var(--muted);font-size:.88rem;margin-top:.2rem}
+.route a:hover .name{color:var(--lagoon)}
+
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:2.5rem 0 0;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--rule);border-radius:10px;font-size:.95rem}
+.legend span{display:inline-flex;align-items:center;gap:.5rem}
+.tag{display:inline-block;font-size:.8rem;font-weight:600;padding:.12rem .55rem;border-radius:5px;white-space:nowrap}
+.t-manual{background:var(--lagoon-soft);color:var(--lagoon)}
+.t-list{background:var(--plum-soft);color:var(--plum)}
+.t-auto{background:var(--sun-soft);color:var(--sun);border:1px dashed var(--sun)}
+
+/* Stages */
+main{padding:2rem 0 4rem}
+.stage{display:grid;grid-template-columns:4.5rem 1fr;gap:0 1.5rem;position:relative;padding-bottom:3.5rem}
+.stage::before{content:"";position:absolute;left:calc(2.25rem - 2px);top:3rem;bottom:0;width:4px;background:var(--lagoon);opacity:.35;border-radius:2px}
+.stage:last-of-type::before{background:none;border-left:4px dashed var(--rule);opacity:1}
+.num{width:4.5rem;height:4.5rem;border-radius:50%;display:grid;place-items:center;background:var(--lagoon);color:var(--paper);font-family:var(--display);font-weight:700;font-size:1.6rem;position:sticky;top:calc(env(safe-area-inset-top,0px) + 1rem)}
+.stage.future .num{background:transparent;color:var(--muted);border:4px dashed var(--muted)}
+.body{min-width:0}
+.body h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:700;padding-top:.6rem}
+.when{color:var(--muted);margin:.4rem 0 1.25rem;max-width:62ch}
+.when strong{color:var(--ink)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:.75rem;max-width:46rem}
+.steps li{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:1rem 1.25rem}
+.steps li.auto{border:1.5px dashed var(--sun)}
+.steps h3{font-size:1.1rem;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem;margin-bottom:.35rem}
+.steps p{margin:.35rem 0 0;max-width:62ch}
+.steps ul{margin:.5rem 0 0;padding-left:1.2rem}
+.steps ul li{background:none;border:0;padding:0;margin:.25rem 0}
+.note{margin:1rem 0 0;max-width:46rem;padding:.9rem 1.15rem;border-left:4px solid var(--lagoon);background:var(--lagoon-soft);border-radius:0 8px 8px 0;font-size:.98rem}
+.note.warn{border-color:var(--sun);background:var(--sun-soft)}
+.kbd{font-weight:600;white-space:nowrap}
+
+/* Migration */
+.migrate{border-top:1px solid var(--rule);padding:3.5rem 0 1rem}
+.migrate h2{font-size:clamp(1.6rem,3.2vw,2.2rem);margin-bottom:.5rem}
+.migrate > p{color:var(--muted);max-width:60ch;margin:0 0 1.5rem}
+.table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:40rem;font-size:.97rem}
+th,td{text-align:left;vertical-align:top;padding:.85rem 1.1rem;border-bottom:1px solid var(--rule)}
+th{font-family:var(--display);font-weight:700;font-size:1rem}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;width:22%}
+
+footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);font-size:.92rem}
+
+@media (max-width:640px){
+  header{padding:3rem 0 2rem}
+  .stage{grid-template-columns:2.75rem 1fr;gap:0 1rem}
+  .num{width:2.75rem;height:2.75rem;font-size:1.1rem}
+  .stage.future .num{border-width:3px}
+  .stage::before{left:calc(1.375rem - 2px);top:2rem}
+  .body h2{padding-top:.15rem}
+}
+@media print{
+  .route{display:none}
+  .num{position:static}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="org">Trio Travel Company</p>
+    <h1>From first inquiry to welcome home</h1>
+    <p class="lede">How a client moves through our process in Travefy. Each stop shows what Dana does, which task list to apply, and which automations are available. The workflows we used in Tern have been reviewed and rebuilt here in a lighter form.</p>
+    <span class="wip">Work in progress: post-travel automations are still under review</span>
+
+    <nav class="route" aria-label="Journey stops">
+      <ol>
+        <li><a href="#lead"><span class="stop">1</span><span class="name">Inbound lead</span><span class="sub">Contact and consult call</span></a></li>
+        <li><a href="#recap"><span class="stop">2</span><span class="name">Call recap</span><span class="sub">Recap email</span></a></li>
+        <li><a href="#agreement"><span class="stop">3</span><span class="name">Agreement and fee</span><span class="sub">Form plus Stripe</span></a></li>
+        <li><a href="#planning"><span class="stop">4</span><span class="name">Planning</span><span class="sub">Planning task list</span></a></li>
+        <li><a href="#booked"><span class="stop">5</span><span class="name">Booked</span><span class="sub">Booked task list</span></a></li>
+        <li class="future"><a href="#post"><span class="stop">6</span><span class="name">Post-travel</span><span class="sub">To be defined</span></a></li>
+      </ol>
+    </nav>
+
+    <div class="legend" aria-label="Legend">
+      <span><span class="tag t-manual">Manual step</span> Dana does this herself</span>
+      <span><span class="tag t-list">Task list</span> Applied to the trip by hand</span>
+      <span><span class="tag t-auto">Inactive automation</span> Ready to send when Dana chooses</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="stage" id="lead">
+    <div class="num" aria-hidden="true">1</div>
+    <div class="body">
+      <h2>Inbound lead</h2>
+      <p class="when"><strong>Starts when</strong> a new inquiry comes in.</p>
+      <ul class="steps">
+        <li>
+          <h3>Create the contact <span class="tag t-manual">Manual step</span></h3>
+          <p>Add the new lead as a contact in Travefy.</p>
+        </li>
+        <li>
+          <h3>Hold the consultation call <span class="tag t-manual">Manual step</span></h3>
+          <p>Dana runs the consultation call. Notes from the call are saved on the contact record so everything about the client lives in one place.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="stage" id="recap">
+    <div class="num" aria-hidden="true">2</div>
+    <div class="body">
+      <h2>Consultation recap</h2>
+      <p class="when"><strong>Starts when</strong> the consultation call is complete.</p>
+      <ul class="steps">
+        <li>
+          <h3>Draft the recap email <span class="tag t-manual">Manual step</span></h3>
+          <p>Use whichever source fits how the notes were taken:</p>
+          <ul>
+            <li>Typed notes: copy them from the contact record in Travefy.</li>
+            <li>Handwritten notes: take a photo and upload it to an AI tool to draft the recap.</li>
+          </ul>
+        </li>
+        <li>
+          <h3>Send the recap <span class="tag t-manual">Manual step</span></h3>
+          <p>Paste the recap into an email and send it from Gmail or from Travefy. Travefy is connected to Dana's email, so either one works and the message is sent from her address.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="stage" id="agreement">
+    <div class="num" aria-hidden="true">3</div>
+    <div class="body">
+      <h2>Agency agreement and planning fee</h2>
+      <p class="when"><strong>Starts when</strong> the recap email has gone out.</p>
+      <ul class="steps">
+        <li class="auto">
+          <h3>Send the agency agreement <span class="tag t-auto">Inactive automation</span></h3>
+          <p>An inactive automation in Travefy sends the form containing the agency agreement, along with a note that the planning fee invoice will come from Stripe.</p>
+        </li>
+        <li>
+          <h3>Send the planning fee <span class="tag t-manual">Manual step</span></h3>
+          <p>The fee can also be sent through Travefy: open <span class="kbd">Automations</span>, create a new one, and select the fee option. This can also be set up inside a task list.</p>
+        </li>
+      </ul>
+      <p class="note warn">The fee amount is left blank on purpose. Dana enters the amount she agreed with the client on the consultation call.</p>
+      <p class="note">Because both the agreement and the fee are sent through Travefy, the signature and payment show up there automatically.</p>
+    </div>
+  </section>
+
+  <section class="stage" id="planning">
+    <div class="num" aria-hidden="true">4</div>
+    <div class="body">
+      <h2>Planning</h2>
+      <p class="when"><strong>Starts when</strong> Dana has received the signed agreement and the paid planning fee. She then creates the trip in Travefy and applies the planning task list.</p>
+      <ul class="steps">
+        <li>
+          <h3>Create the trip <span class="tag t-manual">Manual step</span></h3>
+          <p>Set up the trip in Travefy for this client.</p>
+        </li>
+        <li>
+          <h3>Apply the planning task list <span class="tag t-list">Task list</span></h3>
+          <p>Task lists don't apply automatically, so this is added by hand. The list is kept light and covers:</p>
+          <ul>
+            <li>Proposal follow-up and updates</li>
+            <li>Special occasions or medical requirements</li>
+            <li>Visa and health notice email (see below)</li>
+          </ul>
+        </li>
+        <li class="auto">
+          <h3>Visa and health notice email <span class="tag t-auto">Inactive automation</span></h3>
+          <p>Carried over from Tern and left inactive so Dana can decide when it's useful, for example on an FIT trip or a cruise. The client opens the Sherpa link in the email and checks the entry requirements for their destination, which puts some of that responsibility in their hands.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="stage" id="booked">
+    <div class="num" aria-hidden="true">5</div>
+    <div class="body">
+      <h2>Booked</h2>
+      <p class="when"><strong>Starts when</strong> the trip is booked, meaning the client has paid a deposit.</p>
+      <ul class="steps">
+        <li>
+          <h3>Apply the booked task list <span class="tag t-list">Task list</span></h3>
+          <p>Two tasks, designed to work for any kind of trip.</p>
+        </li>
+        <li>
+          <h3>Add trip-specific tasks <span class="tag t-manual">Manual step</span></h3>
+          <p>Dana adds whatever this particular trip needs. Examples include booking flights to meet a cruise or arranging a car rental.</p>
+        </li>
+        <li>
+          <h3>Issue final paperwork <span class="tag t-manual">Manual step</span></h3>
+          <p>A reminder to send the finalized trip information about two weeks before departure, whether the trip is an all-inclusive, a cruise, or an FIT. This could become an automated walkthrough email with a link to Dana's Calendly so the client can book a time to go over everything.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="stage future" id="post">
+    <div class="num" aria-hidden="true">6</div>
+    <div class="body">
+      <h2>Pre-departure and post-travel</h2>
+      <p class="when"><strong>Still being defined.</strong> The remaining Travefy automations will be reviewed next and added here once we decide which to keep.</p>
+      <p class="note warn">Not yet decided. Existing Travefy automations to review include the bon voyage email, day-one check-in, welcome home email, welcome home survey, and six-month post-travel check-in.</p>
+    </div>
+  </section>
+
+  <section class="migrate" aria-labelledby="mig-h">
+    <h2 id="mig-h">What changed from Tern</h2>
+    <p>The Tern workflows were reviewed stage by stage and rebuilt in Travefy. The main differences:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Area</th><th scope="col">In Tern</th><th scope="col">In Travefy</th></tr></thead>
+        <tbody>
+          <tr><td>New vs existing clients</td><td>Separate workflows for new and existing clients.</td><td>One planning task list for everyone. Travefy can't auto-apply task lists, so splitting them adds work without a benefit.</td></tr>
+          <tr><td>Task lists</td><td>Longer lead workflow with numbered steps.</td><td>Lightweight lists focused on what actually needs a reminder.</td></tr>
+          <tr><td>Agreement and fee</td><td>Call recap and planning invoice handled as a lead task.</td><td>Agreement form sent by an inactive automation; fee sent through Travefy, with the amount entered by Dana.</td></tr>
+          <tr><td>Visa and health notice</td><td>Sent as part of the workflow.</td><td>Kept as an inactive automation, sent at Dana's discretion.</td></tr>
+          <tr><td>Booked trips</td><td>Long pre/post task list.</td><td>Two tasks: add trip-specific tasks and issue final paperwork.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">Trio Travel Company internal process guide. Last updated October 2026. This is a living document and will change as the remaining workflows are reviewed.</div>
+</footer>
+
+</body>
+</html>
