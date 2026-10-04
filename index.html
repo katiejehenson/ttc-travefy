@@ -48,9 +48,9 @@ h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;letter-spacing:-.02em;max-
 
 /* Route map: the memorable element */
 .route{margin:3rem 0 0;overflow-x:auto;padding-bottom:.5rem}
-.route ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(8.5rem,1fr));min-width:52rem;position:relative}
-.route ol::before{content:"";position:absolute;left:1.1rem;right:calc(100%/6 - 1.1rem);top:1.05rem;height:4px;background:var(--lagoon);border-radius:2px}
-.route ol::after{content:"";position:absolute;right:1.1rem;left:calc(100% - 100%/6 + 1.1rem);top:1.05rem;height:0;border-top:4px dashed var(--rule)}
+.route ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(9rem,1fr));min-width:46rem;position:relative}
+.route ol::before{content:"";position:absolute;left:1.1rem;right:calc(100%/5 - 1.1rem);top:1.05rem;height:4px;background:var(--lagoon);border-radius:2px}
+.route ol::after{content:"";position:absolute;right:1.1rem;left:calc(100% - 100%/5 + 1.1rem);top:1.05rem;height:0;border-top:4px dashed var(--rule)}
 .route li{position:relative;padding-right:1rem}
 .route a{display:block;text-decoration:none;color:var(--ink)}
 .stop{display:grid;place-items:center;width:2.35rem;height:2.35rem;border-radius:50%;background:var(--surface);border:4px solid var(--lagoon);font-family:var(--display);font-weight:700;font-size:.95rem;position:relative;z-index:1}
@@ -85,6 +85,11 @@ main{padding:2rem 0 4rem}
 .steps p{margin:.35rem 0 0;max-width:62ch}
 .steps ul{margin:.5rem 0 0;padding-left:1.2rem}
 .steps ul li{background:none;border:0;padding:0;margin:.25rem 0}
+.listname{font-family:var(--display);font-weight:700;font-size:1.1rem;margin:0 0 .75rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+ol.steps{counter-reset:s}
+ol.steps > li{counter-increment:s;position:relative;padding-left:3.1rem}
+ol.steps > li::before{content:counter(s);position:absolute;left:1.15rem;top:1rem;font-family:var(--display);font-weight:700;color:var(--muted)}
+.trig{color:var(--muted);font-size:.9rem;margin:.1rem 0 0 !important}
 .note{margin:1rem 0 0;max-width:46rem;padding:.9rem 1.15rem;border-left:4px solid var(--lagoon);background:var(--lagoon-soft);border-radius:0 8px 8px 0;font-size:.98rem}
 .note.warn{border-color:var(--sun);background:var(--sun-soft)}
 .kbd{font-weight:600;white-space:nowrap}
@@ -132,18 +137,17 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
     <nav class="route" aria-label="Journey stops">
       <ol>
         <li><a href="#lead"><span class="stop">1</span><span class="name">Inbound lead</span><span class="sub">Contact and consult call</span></a></li>
-        <li><a href="#recap"><span class="stop">2</span><span class="name">Call recap</span><span class="sub">Recap email</span></a></li>
-        <li><a href="#agreement"><span class="stop">3</span><span class="name">Agreement and fee</span><span class="sub">Form plus Stripe</span></a></li>
-        <li><a href="#planning"><span class="stop">4</span><span class="name">Planning</span><span class="sub">Planning task list</span></a></li>
-        <li><a href="#booked"><span class="stop">5</span><span class="name">Booked</span><span class="sub">Booked task list</span></a></li>
-        <li class="future"><a href="#post"><span class="stop">6</span><span class="name">Post-travel</span><span class="sub">To be defined</span></a></li>
+        <li><a href="#trip-leads"><span class="stop">2</span><span class="name">Recap and agreement</span><span class="sub">TTC Trip Leads</span></a></li>
+        <li><a href="#planning"><span class="stop">3</span><span class="name">Planning</span><span class="sub">TTC Planning</span></a></li>
+        <li><a href="#booked"><span class="stop">4</span><span class="name">Booked</span><span class="sub">Booked task list</span></a></li>
+        <li class="future"><a href="#post"><span class="stop">5</span><span class="name">Post-travel</span><span class="sub">To be defined</span></a></li>
       </ol>
     </nav>
 
     <div class="legend" aria-label="Legend">
-      <span><span class="tag t-manual">Manual step</span> Dana does this herself</span>
       <span><span class="tag t-list">Task list</span> Applied to the trip by hand</span>
-      <span><span class="tag t-auto">Inactive automation</span> Ready to send when Dana chooses</span>
+      <span><span class="tag t-manual">Task</span> A to-do Dana completes</span>
+      <span><span class="tag t-auto">Automation</span> A form, fee or email Travefy sends. Any automation with the default 1-day-before-trip trigger is inactive until Dana sets a send date or sends it now.</span>
     </div>
   </div>
 </header>
@@ -168,77 +172,81 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
     </div>
   </section>
 
-  <section class="stage" id="recap">
+  <section class="stage" id="trip-leads">
     <div class="num" aria-hidden="true">2</div>
     <div class="body">
-      <h2>Consultation recap</h2>
-      <p class="when"><strong>Starts when</strong> the consultation call is complete.</p>
-      <ul class="steps">
+      <h2>Recap, agreement and planning fee</h2>
+      <p class="when"><strong>Starts when</strong> the consultation call is complete. Apply the TTC Trip Leads task list to the trip.</p>
+      <p class="listname">TTC Trip Leads <span class="tag t-list">Task list</span></p>
+      <ol class="steps">
         <li>
-          <h3>Draft the recap email <span class="tag t-manual">Manual step</span></h3>
-          <p>Use whichever source fits how the notes were taken:</p>
-          <ul>
-            <li>Typed notes: copy them from the contact record in Travefy.</li>
-            <li>Handwritten notes: take a photo and upload it to an AI tool to draft the recap.</li>
-          </ul>
+          <h3>Send recap email <span class="tag t-manual">Task</span></h3>
+          <p>Copy the call notes from the contact record in Travefy, or photograph handwritten notes and upload them to an AI tool to draft the recap. Paste it into an email and send from Gmail or Travefy. Travefy is connected to Dana&#39;s email, so either sends from her address.</p>
         </li>
         <li>
-          <h3>Send the recap <span class="tag t-manual">Manual step</span></h3>
-          <p>Paste the recap into an email and send it from Gmail or from Travefy. Travefy is connected to Dana's email, so either one works and the message is sent from her address.</p>
+          <h3>Send Agency Agreement &amp; Planning Fee invoice <span class="tag t-manual">Task</span></h3>
+          <p>The reminder to send both items below. Once the client signs and pays, both show up in Travefy.</p>
         </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="stage" id="agreement">
-    <div class="num" aria-hidden="true">3</div>
-    <div class="body">
-      <h2>Agency agreement and planning fee</h2>
-      <p class="when"><strong>Starts when</strong> the recap email has gone out.</p>
-      <ul class="steps">
         <li class="auto">
-          <h3>Send the agency agreement <span class="tag t-auto">Inactive automation</span></h3>
-          <p>An inactive automation in Travefy sends the form containing the agency agreement, along with a note that the planning fee invoice will come from Stripe.</p>
+          <h3>Automatic Form - Trio Travel Company Agreement <span class="tag t-auto">Automation</span></h3>
+          <p class="trig"><strong>Inactive.</strong> The default trigger in Travefy is 1 day before itinerary start date. Dana either picks a fixed date to send or chooses Send Now.</p>
+          <p>Sends the agency agreement form, with a note that the planning fee invoice will come from Stripe.</p>
         </li>
-        <li>
-          <h3>Send the planning fee <span class="tag t-manual">Manual step</span></h3>
-          <p>The fee can also be sent through Travefy: open <span class="kbd">Automations</span>, create a new one, and select the fee option. This can also be set up inside a task list.</p>
+        <li class="auto">
+          <h3>Automatic Fee <span class="tag t-auto">Automation</span></h3>
+          <p>Sends the planning fee invoice.</p>
         </li>
-      </ul>
+      </ol>
       <p class="note warn">The fee amount is left blank on purpose. Dana enters the amount she agreed with the client on the consultation call.</p>
-      <p class="note">Because both the agreement and the fee are sent through Travefy, the signature and payment show up there automatically.</p>
     </div>
   </section>
 
   <section class="stage" id="planning">
-    <div class="num" aria-hidden="true">4</div>
+    <div class="num" aria-hidden="true">3</div>
     <div class="body">
       <h2>Planning</h2>
-      <p class="when"><strong>Starts when</strong> Dana has received the signed agreement and the paid planning fee. She then creates the trip in Travefy and applies the planning task list.</p>
-      <ul class="steps">
+      <p class="when"><strong>Starts when</strong> Dana has received the signed agreement and the paid planning fee. Apply the TTC Planning task list to the trip. Travefy can&#39;t apply task lists automatically, so this is done by hand.</p>
+      <p class="listname">TTC Planning <span class="tag t-list">Task list</span></p>
+      <ol class="steps">
         <li>
-          <h3>Create the trip <span class="tag t-manual">Manual step</span></h3>
-          <p>Set up the trip in Travefy for this client.</p>
-        </li>
-        <li>
-          <h3>Apply the planning task list <span class="tag t-list">Task list</span></h3>
-          <p>Task lists don't apply automatically, so this is added by hand. The list is kept light and covers:</p>
-          <ul>
-            <li>Proposal follow-up and updates</li>
-            <li>Special occasions or medical requirements</li>
-            <li>Visa and health notice email (see below)</li>
-          </ul>
+          <h3>Proposal sent - Send Traveler profile form <span class="tag t-manual">Task</span></h3>
+          <p>Once the proposal has gone out, send the client the traveler profile form.</p>
         </li>
         <li class="auto">
-          <h3>Visa and health notice email <span class="tag t-auto">Inactive automation</span></h3>
-          <p>Carried over from Tern and left inactive so Dana can decide when it's useful, for example on an FIT trip or a cruise. The client opens the Sherpa link in the email and checks the entry requirements for their destination, which puts some of that responsibility in their hands.</p>
+          <h3>Automatic Form - TTC Credit Card Authorization Form <span class="tag t-auto">Automation</span></h3>
+          <p class="trig"><strong>Inactive.</strong> The default trigger in Travefy is 1 day before itinerary start date. Dana either picks a fixed date to send or chooses Send Now.</p>
+          <p>Sends the credit card authorization form.</p>
         </li>
-      </ul>
+        <li>
+          <h3>Client confirms trip - Send cc authorization form <span class="tag t-manual">Task</span></h3>
+          <p>When the client confirms the trip, send the credit card authorization form above.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - TTC Traveler Information Form with Passport Upload <span class="tag t-auto">Automation</span></h3>
+          <p>Collects traveler details and a passport upload.</p>
+        </li>
+        <li>
+          <h3>Special occassions or medical requirements? <span class="tag t-manual">Task</span></h3>
+          <p>Check whether the trip involves a special occasion or any medical requirements.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Preparing for Your Journey: Entry &amp; Travel Requirements <span class="tag t-auto">Automation</span></h3>
+          <p>The entry and travel requirements email. The client opens the Sherpa link in it to check what their destination requires, which puts some of that responsibility in their hands.</p>
+        </li>
+        <li>
+          <h3>Client confirms trip - Send entry &amp; visa email (if applicable) <span class="tag t-manual">Task</span></h3>
+          <p>Dana decides whether to send the email above, for example on an FIT trip or a cruise.</p>
+        </li>
+        <li>
+          <h3>Move trip to BOOKED <span class="tag t-manual">Task</span></h3>
+          <p>Once the client has paid a deposit, change the trip status to Booked and move on to the next stage.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
   <section class="stage" id="booked">
-    <div class="num" aria-hidden="true">5</div>
+    <div class="num" aria-hidden="true">4</div>
     <div class="body">
       <h2>Booked</h2>
       <p class="when"><strong>Starts when</strong> the trip is booked, meaning the client has paid a deposit.</p>
@@ -260,7 +268,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
   </section>
 
   <section class="stage future" id="post">
-    <div class="num" aria-hidden="true">6</div>
+    <div class="num" aria-hidden="true">5</div>
     <div class="body">
       <h2>Pre-departure and post-travel</h2>
       <p class="when"><strong>Still being defined.</strong> The remaining Travefy automations will be reviewed next and added here once we decide which to keep.</p>
@@ -276,9 +284,9 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         <thead><tr><th scope="col">Area</th><th scope="col">In Tern</th><th scope="col">In Travefy</th></tr></thead>
         <tbody>
           <tr><td>New vs existing clients</td><td>Separate workflows for new and existing clients.</td><td>One planning task list for everyone. Travefy can't auto-apply task lists, so splitting them adds work without a benefit.</td></tr>
-          <tr><td>Task lists</td><td>Longer lead workflow with numbered steps.</td><td>Lightweight lists focused on what actually needs a reminder.</td></tr>
-          <tr><td>Agreement and fee</td><td>Call recap and planning invoice handled as a lead task.</td><td>Agreement form sent by an inactive automation; fee sent through Travefy, with the amount entered by Dana.</td></tr>
-          <tr><td>Visa and health notice</td><td>Sent as part of the workflow.</td><td>Kept as an inactive automation, sent at Dana's discretion.</td></tr>
+          <tr><td>Task lists</td><td>Longer lead workflow with numbered steps.</td><td>Two short lists before booking, TTC Trip Leads and TTC Planning, mixing tasks with automations.</td></tr>
+          <tr><td>Agreement and fee</td><td>Call recap and planning invoice handled as a lead task.</td><td>Part of the TTC Trip Leads task list: two tasks plus automations for the agreement form and the fee, with the amount entered by Dana.</td></tr>
+          <tr><td>Visa and health notice</td><td>Sent as part of the workflow.</td><td>An automation in the TTC Planning task list, sent at Dana's discretion.</td></tr>
           <tr><td>Booked trips</td><td>Long pre/post task list.</td><td>Two tasks: add trip-specific tasks and issue final paperwork.</td></tr>
         </tbody>
       </table>
