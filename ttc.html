@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trio Travel Company | TTC task lists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F7F8; --surface:#FFFFFF; --ink:#16243A; --muted:#566577;
+  --rule:#D3DCE2; --lagoon:#1F7A8C; --lagoon-soft:#DCEEF1;
+  --sun:#B7861A; --sun-soft:#FBF1D9; --plum:#6B4E8C; --plum-soft:#EEE7F5;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body:"Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
+    --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
+    --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
+  --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
+  --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--lagoon)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--lagoon);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
+
+/* Hero */
+header{padding:4.5rem 0 3rem}
+.org{font-weight:600;color:var(--muted);margin:0 0 1rem}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;letter-spacing:-.02em;max-width:16ch}
+.lede{max-width:58ch;color:var(--muted);font-size:1.15rem;margin:1.25rem 0 0}
+.wip{display:inline-block;margin-top:1.5rem;padding:.35rem .8rem;border:1.5px dashed var(--sun);color:var(--sun);border-radius:999px;font-weight:600;font-size:.9rem}
+
+/* Route map: the memorable element */
+.route{margin:3rem 0 0;overflow-x:auto;padding-bottom:.5rem}
+.route ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(9rem,1fr));min-width:46rem;position:relative}
+.route ol::before{content:"";position:absolute;left:1.1rem;right:calc(100%/5 - 1.1rem);top:1.05rem;height:4px;background:var(--lagoon);border-radius:2px}
+.route ol::after{content:"";position:absolute;right:1.1rem;left:calc(100% - 100%/5 + 1.1rem);top:1.05rem;height:0;border-top:4px dashed var(--rule)}
+.route li{position:relative;padding-right:1rem}
+.route a{display:block;text-decoration:none;color:var(--ink)}
+.stop{display:grid;place-items:center;width:2.35rem;height:2.35rem;border-radius:50%;background:var(--surface);border:4px solid var(--lagoon);font-family:var(--display);font-weight:700;font-size:.95rem;position:relative;z-index:1}
+.route li.future .stop{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.route .name{display:block;margin-top:.7rem;font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.2}
+.route .sub{display:block;color:var(--muted);font-size:.88rem;margin-top:.2rem}
+.route a:hover .name{color:var(--lagoon)}
+
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:2.5rem 0 0;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--rule);border-radius:10px;font-size:.95rem}
+.legend span{display:inline-flex;align-items:center;gap:.5rem}
+.tag{display:inline-block;font-size:.8rem;font-weight:600;padding:.12rem .55rem;border-radius:5px;white-space:nowrap}
+.t-manual{background:var(--lagoon-soft);color:var(--lagoon)}
+.t-list{background:var(--plum-soft);color:var(--plum)}
+.t-auto{background:var(--sun-soft);color:var(--sun);border:1px dashed var(--sun)}
+
+/* Stages */
+main{padding:2rem 0 4rem}
+.stage{display:grid;grid-template-columns:4.5rem 1fr;gap:0 1.5rem;position:relative;padding-bottom:3.5rem}
+.stage::before{content:"";position:absolute;left:calc(2.25rem - 2px);top:3rem;bottom:0;width:4px;background:var(--lagoon);opacity:.35;border-radius:2px}
+.stage:last-of-type::before{background:none;border-left:4px dashed var(--rule);opacity:1}
+.num{width:4.5rem;height:4.5rem;border-radius:50%;display:grid;place-items:center;background:var(--lagoon);color:var(--paper);font-family:var(--display);font-weight:700;font-size:1.6rem;position:sticky;top:calc(env(safe-area-inset-top,0px) + 1rem)}
+.stage.future .num{background:transparent;color:var(--muted);border:4px dashed var(--muted)}
+.body{min-width:0}
+.body h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:700;padding-top:.6rem}
+.when{color:var(--muted);margin:.4rem 0 1.25rem;max-width:62ch}
+.when strong{color:var(--ink)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:.75rem;max-width:46rem}
+.steps li{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:1rem 1.25rem}
+.steps li.auto{border:1.5px dashed var(--sun)}
+.steps h3{font-size:1.1rem;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem;margin-bottom:.35rem}
+.steps p{margin:.35rem 0 0;max-width:62ch}
+.steps ul{margin:.5rem 0 0;padding-left:1.2rem}
+.steps ul li{background:none;border:0;padding:0;margin:.25rem 0}
+.listname{font-family:var(--display);font-weight:700;font-size:1.1rem;margin:0 0 .75rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+ol.steps{counter-reset:s}
+ol.steps > li{counter-increment:s;position:relative;padding-left:3.1rem}
+ol.steps > li::before{content:counter(s);position:absolute;left:1.15rem;top:1rem;font-family:var(--display);font-weight:700;color:var(--muted)}
+.trig{color:var(--muted);font-size:.9rem;margin:.1rem 0 0 !important}
+.route ol::before{right:1.1rem !important}
+.route ol::after{display:none}
+.timeline{list-style:none;margin:0;padding:0 0 0 1.25rem;max-width:46rem;border-left:4px solid var(--rule)}
+.timeline li{position:relative;padding:.55rem 0 .55rem 1.25rem;display:grid;grid-template-columns:minmax(9rem,11rem) 1fr;gap:.15rem 1rem;align-items:baseline}
+.timeline li::before{content:"";position:absolute;left:calc(-1.25rem - 9px);top:.95rem;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--lagoon)}
+.timeline li.anchor::before{background:var(--lagoon);width:18px;height:18px;left:calc(-1.25rem - 11px);top:.85rem}
+.timeline li.anchor .tl-when{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--lagoon)}
+.tl-when{color:var(--muted);font-size:.95rem}
+.tl-what{font-weight:600;display:flex;flex-wrap:wrap;gap:.4rem .6rem;align-items:center}
+.tl-ref{grid-column:2;color:var(--muted);font-size:.85rem}
+@media (max-width:640px){.timeline li{grid-template-columns:1fr}.tl-ref{grid-column:1}}
+.note{margin:1rem 0 0;max-width:46rem;padding:.9rem 1.15rem;border-left:4px solid var(--lagoon);background:var(--lagoon-soft);border-radius:0 8px 8px 0;font-size:.98rem}
+.note.warn{border-color:var(--sun);background:var(--sun-soft)}
+.kbd{font-weight:600;white-space:nowrap}
+
+/* Migration */
+.migrate{border-top:1px solid var(--rule);padding:3.5rem 0 1rem}
+.migrate h2{font-size:clamp(1.6rem,3.2vw,2.2rem);margin-bottom:.5rem}
+.migrate > p{color:var(--muted);max-width:60ch;margin:0 0 1.5rem}
+.tbb-link{display:inline-block;font-weight:600;padding:.6rem 1.1rem;border:2px solid var(--lagoon);border-radius:8px;text-decoration:none}
+.tbb-link:hover{background:var(--lagoon-soft)}
+.table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:40rem;font-size:.97rem}
+th,td{text-align:left;vertical-align:top;padding:.85rem 1.1rem;border-bottom:1px solid var(--rule)}
+th{font-family:var(--display);font-weight:700;font-size:1rem}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;width:22%}
+
+footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);font-size:.92rem}
+
+@media (max-width:640px){
+  header{padding:3rem 0 2rem}
+  .stage{grid-template-columns:2.75rem 1fr;gap:0 1rem}
+  .num{width:2.75rem;height:2.75rem;font-size:1.1rem}
+  .stage.future .num{border-width:3px}
+  .stage::before{left:calc(1.375rem - 2px);top:2rem}
+  .body h2{padding-top:.15rem}
+}
+@media print{
+  .route{display:none}
+  .num{position:static}
+  body{background:#fff}
+}
+
+.sitenav{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;padding-top:1.25rem;font-weight:600}
+.sitenav a{text-decoration:none;color:var(--muted);padding:.2rem 0;border-bottom:2px solid transparent}
+.sitenav a:hover{color:var(--lagoon)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--lagoon)}
+.do{margin:0 0 1rem;padding-left:1.2rem;max-width:62ch}
+.do li{margin:.35rem 0}
+.apply{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1rem}
+.listchip{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .85rem;border-radius:8px;background:var(--plum-soft);color:var(--plum);font-weight:600;text-decoration:none;font-size:.97rem}
+.listchip:hover{outline:2px solid var(--plum)}
+.next{color:var(--muted);margin:0;max-width:62ch}
+.next strong{color:var(--ink)}
+.choose{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem;margin:0 0 1.25rem;max-width:46rem}
+.choose div{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:.9rem 1.1rem}
+.choose h3{font-size:1.05rem;margin:0 0 .4rem}
+.choose p{margin:.3rem 0 0;font-size:.95rem;color:var(--muted)}
+.src{font-size:.78rem;font-weight:600;padding:.1rem .45rem;border-radius:5px;background:var(--plum-soft);color:var(--plum);white-space:nowrap}
+.listcard{background:transparent;margin:0 0 3.5rem;scroll-margin-top:1rem}
+.listcard h2{font-size:clamp(1.5rem,3vw,2rem);display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+.listcard .when{margin:.4rem 0 1rem}
+.meta{color:var(--muted);font-size:.9rem;margin:-.5rem 0 1rem}
+.jump{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 0}
+</style>
+</head>
+<body>
+<nav class="sitenav wrap" aria-label="Site"><a href="./">Process</a><a href="ttc.html" aria-current="page">TTC task lists</a><a href="tbb.html">Travel Biz Boss task lists</a></nav>
+<header>
+  <div class="wrap">
+    <p class="org">Trio Travel Company</p>
+    <h1>TTC task lists</h1>
+    <p class="lede">Every task list in Travefy tagged <strong>ttc</strong>, item by item, in the same order and with the same names Dana sees in Travefy. For when and why each list is used, see the <a href="./">process page</a>.</p>
+    <div class="legend" aria-label="Legend">
+      <span><span class="tag t-manual">Task</span> A to-do Dana completes</span>
+      <span><span class="tag t-auto">Automation</span> A form, fee or email Travefy sends. Ones marked Inactive wait for Dana to set a send date or choose Send Now.</span>
+    </div>
+    <nav class="jump" aria-label="Task lists"><a class="listchip" href="#trip-leads">TTC Trip Leads</a><a class="listchip" href="#planning">TTC Planning</a><a class="listchip" href="#booked-all">TTC Booked - All Trips</a><a class="listchip" href="#booked-fit">TTC Booked - FIT</a><a class="listchip" href="#booked-resort">TTC Booked - Resort Stay</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <section class="listcard" id="trip-leads">
+    <h2>TTC Trip Leads <span class="tag t-list">Task list</span></h2>
+    <p class="when"><strong>When to add:</strong> Added when the contact is created for a new lead. <a href="./#lead">See this step in the process</a></p>
+    <p class="meta">4 items: 2 tasks, 2 automations</p>
+    <ol class="steps">
+        <li>
+          <h3>Send recap email <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li>
+          <h3>Send Agency Agreement &amp; Planning Fee invoice <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - Trio Travel Company Agreement <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p>Inactive. The default trigger in Travefy is 1 day before itinerary start date. Dana either picks a fixed date to send or chooses Send Now.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Fee <span class="tag t-auto">Automation</span></h3>
+          <p>The amount is blank. Dana enters the planning fee agreed on the consultation call.</p>
+        </li>
+    </ol>
+  </section>
+  <section class="listcard" id="planning">
+    <h2>TTC Planning <span class="tag t-list">Task list</span></h2>
+    <p class="when"><strong>When to add:</strong> Added once the agreement is signed and the planning fee is paid. <a href="./#planning">See this step in the process</a></p>
+    <p class="meta">8 items: 5 tasks, 3 automations</p>
+    <ol class="steps">
+        <li>
+          <h3>Proposal sent - Send Traveler profile form <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - TTC Traveler Information Form with Passport Upload <span class="tag t-auto">Automation</span></h3>
+        </li>
+        <li>
+          <h3>Special occassions or medical requirements? <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li>
+          <h3>Client confirms trip - Send cc authorization form <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - TTC Credit Card Authorization Form <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p>Inactive. The default trigger in Travefy is 1 day before itinerary start date. Dana either picks a fixed date to send or chooses Send Now.</p>
+        </li>
+        <li>
+          <h3>Client confirms trip - Send entry &amp; visa email (if applicable) <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Preparing for Your Journey: Entry &amp; Travel Requirements <span class="tag t-auto">Automation</span></h3>
+        </li>
+        <li>
+          <h3>Move trip to BOOKED <span class="tag t-manual">Task</span></h3>
+        </li>
+    </ol>
+  </section>
+  <section class="listcard" id="booked-all">
+    <h2>TTC Booked - All Trips <span class="tag t-list">Task list</span></h2>
+    <p class="when"><strong>When to add:</strong> Added to every trip once the deposit is paid, whatever the trip type. <a href="./#booked">See this step in the process</a></p>
+    <p class="meta">16 items: 9 tasks, 7 automations</p>
+    <ol class="steps">
+        <li>
+          <h3>Send email to client re: Deposit Paid or Booking Confirmed <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li>
+          <h3>Payment Due - schedule inactive automations (or click send now) <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li>
+          <h3>Send Travel Insurance email (if applicable) <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Protect your trip investment <span class="tag t-auto">Automation</span></h3>
+          <p>Inactive. Scheduled or sent now by Dana.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Final payment due + protecting your trip <span class="tag t-auto">Automation</span></h3>
+          <p>Inactive. Scheduled for the payment due date or sent now by Dana.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - You&#x27;re paid in full! Let the countdown begin <span class="tag t-auto">Automation</span></h3>
+          <p>Inactive. Scheduled or sent now by Dana.</p>
+        </li>
+        <li>
+          <h3>Update itinerary with final documents <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 25 days before itinerary start date</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Your Trip Details Are Ready <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 14 days before itinerary start date</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Bon Voyage! <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+        </li>
+        <li>
+          <h3>Update Trip Status to Traveling <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 1 day before itinerary start date</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - TTC Trip Survey <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 4 days after itinerary end date</p>
+        </li>
+        <li>
+          <h3>Review Trip feedback <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 10 days before itinerary end date</p>
+        </li>
+        <li>
+          <h3>Update Trip Status to Traveled <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 1 day after itinerary end date</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - TTC Trip Request <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 180 days after itinerary end date</p>
+        </li>
+        <li>
+          <h3>Commission Received? <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 55 days after itinerary end date</p>
+        </li>
+        <li>
+          <h3>Update Trip Status to Archived <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 60 days after itinerary end date</p>
+        </li>
+    </ol>
+  </section>
+  <section class="listcard" id="booked-fit">
+    <h2>TTC Booked - FIT <span class="tag t-list">Task list</span></h2>
+    <p class="when"><strong>When to add:</strong> Added alongside All Trips when the trip is an FIT. <a href="./#booked">See this step in the process</a></p>
+    <p class="meta">5 items: 2 tasks, 3 automations</p>
+    <ol class="steps">
+        <li>
+          <h3>Request Supplier final paperwork <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 35 days before itinerary start date</p>
+        </li>
+        <li>
+          <h3>Send hotel(s) confirmation / welcome letters <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 7 days before itinerary start date</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Let&#x27;s Finalize the Details for Your Trip <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 90 days before itinerary start date</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - TTC Traveler Information Form with Passport Upload <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 45 days before itinerary start date</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Welcome: You have arrived <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 2 days after itinerary start date</p>
+        </li>
+    </ol>
+  </section>
+  <section class="listcard" id="booked-resort">
+    <h2>TTC Booked - Resort Stay <span class="tag t-list">Task list</span></h2>
+    <p class="when"><strong>When to add:</strong> Added alongside All Trips for a resort or all-inclusive stay. <a href="./#booked">See this step in the process</a></p>
+    <p class="meta">3 items: 3 tasks, 0 automations</p>
+    <ol class="steps">
+        <li>
+          <h3>Confirm air seats at airline website <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li>
+          <h3>Confirm amenities are showing on the reservation <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 21 days before itinerary start date</p>
+        </li>
+        <li>
+          <h3>Confirm flight times still match transfer times <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 14 days before itinerary start date</p>
+        </li>
+    </ol>
+  </section>
+</main>
+<footer><div class="wrap">Trio Travel Company internal process guide. Last updated October 8, 2026. This is a living document and will change as the task lists are refined.</div></footer>
+</body>
+</html>
