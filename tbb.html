@@ -136,10 +136,48 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
 .lines .aka{color:var(--muted);font-size:.9rem}
 .lines .exact{font-size:.82rem;color:var(--lagoon);margin-top:.35rem}
 .empty{color:var(--muted);display:none}
+
+.sitenav{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;padding-top:1.25rem;font-weight:600}
+.sitenav a{text-decoration:none;color:var(--muted);padding:.2rem 0;border-bottom:2px solid transparent}
+.sitenav a:hover{color:var(--lagoon)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--lagoon)}
+.do{margin:0 0 1rem;padding-left:1.2rem;max-width:62ch}
+.do li{margin:.35rem 0}
+.apply{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1rem}
+.listchip{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .85rem;border-radius:8px;background:var(--plum-soft);color:var(--plum);font-weight:600;text-decoration:none;font-size:.97rem}
+.listchip:hover{outline:2px solid var(--plum)}
+.next{color:var(--muted);margin:0;max-width:62ch}
+.next strong{color:var(--ink)}
+.choose{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem;margin:0 0 1.25rem;max-width:46rem}
+.choose div{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:.9rem 1.1rem}
+.choose h3{font-size:1.05rem;margin:0 0 .4rem}
+.choose p{margin:.3rem 0 0;font-size:.95rem;color:var(--muted)}
+.src{font-size:.78rem;font-weight:600;padding:.1rem .45rem;border-radius:5px;background:var(--plum-soft);color:var(--plum);white-space:nowrap}
+.listcard{background:transparent;margin:0 0 3.5rem;scroll-margin-top:1rem}
+.listcard h2{font-size:clamp(1.5rem,3vw,2rem);display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+.listcard .when{margin:.4rem 0 1rem}
+.meta{color:var(--muted);font-size:.9rem;margin:-.5rem 0 1rem}
+.jump{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 0}
+
+.wf h3 a{color:inherit}
+.ov{display:inline-block;font-size:.8rem;font-weight:600;padding:.12rem .55rem;border-radius:5px;white-space:nowrap;margin-right:.35rem}
+.ov-c{background:var(--lagoon-soft);color:var(--lagoon)}
+.ov-p{background:var(--sun-soft);color:var(--sun)}
+.ov-n{background:var(--plum-soft);color:var(--plum)}
+.ovline{font-size:.95rem}
+.ovsum{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.75rem;margin:0 0 1rem;max-width:46rem}
+.ovsum div{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:.9rem 1.1rem}
+.ovsum strong{display:block;font-family:var(--display);font-size:2rem;line-height:1.1;margin-top:.4rem}
+.ovsum p{margin:.3rem 0 0;color:var(--muted);font-size:.92rem}
+.addon{max-width:46rem;margin:0 0 1.25rem;background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:.8rem 1.1rem}
+.addon summary{cursor:pointer;font-weight:600}
+.addon ul{margin:.6rem 0 0;padding-left:1.2rem}
+.addon li{margin:.25rem 0}
+.muted{color:var(--muted);font-size:.9rem}
 </style>
 </head>
 <body>
-<div class="wrap topnav"><a href="./">Back to the customer journey</a></div>
+<nav class="sitenav wrap" aria-label="Site"><a href="./">Process</a><a href="ttc.html">TTC task lists</a><a href="tbb.html" aria-current="page">Travel Biz Boss task lists</a></nav>
 <header>
   <div class="wrap">
     <p class="org">Trio Travel Company</p>
@@ -153,12 +191,225 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
     <h2 id="wf-h">Cruise workflows</h2>
     <p>Four general cruise lists. The three workflows are split by type of cruise line.</p>
     <ul class="wf">
-      <li><h3>Cruise Onboarding</h3><p>Exact name: Cruise Onboarding</p></li>
-      <li><h3>Mass market</h3><p>Exact name: Cruise Workflow - Mass Market 3/2/26</p></li>
-      <li><h3>Premium and luxury</h3><p>Exact name: Cruise Workflow - Premium/Lux 3/2/26</p></li>
-      <li><h3>River</h3><p>Exact name: Cruise Workflow - River 3/2/26</p></li>
+      <li><h3><a href="#onboarding">Cruise Onboarding</a></h3><p>Exact name: Cruise Onboarding (Dana to review)</p></li>
+      <li><h3><a href="#mass-market">Mass market</a></h3><p>Exact name: Cruise Workflow - Mass Market 3/2/26</p><p>Checked against TTC Booked - All Trips</p></li>
+      <li><h3>Premium and luxury</h3><p>Exact name: Cruise Workflow - Premium/Lux 3/2/26</p><p>Not reviewed yet</p></li>
+      <li><h3>River</h3><p>Exact name: Cruise Workflow - River 3/2/26</p><p>Not reviewed yet</p></li>
     </ul>
   </section>
+  <section class="listcard" id="onboarding">
+    <h2>Cruise Onboarding (Dana to review) <span class="tag t-list">Task list</span></h2>
+    <p class="when">Three welcome emails for a new cruise inquiry, each paired with a task to send it, then a hand-off to the planning workflow.</p>
+    <p class="meta">7 items: 4 tasks, 3 automations</p>
+    <ol class="steps">
+        <li>
+          <h3>01. Cruise inquiry received - let&#x27;s set up a call: send &quot;Cruise inquiry received - let&#x27;s set up a call&quot; <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Cruise inquiry received - let&#x27;s set up a call <span class="tag t-auto">Automation</span></h3>
+        </li>
+        <li>
+          <h3>02. Welcome and best practices for working with me: send &quot;Let&#x27;s get started!&quot; <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Let&#x27;s get started! <span class="tag t-auto">Automation</span></h3>
+        </li>
+        <li>
+          <h3>03. Info received - let&#x27;s get started: send &quot;I am working on your cruise proposal&quot; <span class="tag t-manual">Task</span></h3>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - I am working on your cruise proposal <span class="tag t-auto">Automation</span></h3>
+        </li>
+        <li>
+          <h3>04. Add Cruise: Planning Workflow <span class="tag t-manual">Task</span></h3>
+        </li>
+    </ol>
+    <p class="note"><strong>Against the TTC process:</strong> TTC Trip Leads has no inquiry or &quot;let&#39;s get started&quot; email; Dana books the call and sends a recap instead. The &quot;working on your proposal&quot; email would sit in TTC Planning. Item 04 points to a list called Cruise: Planning Workflow, which isn&#39;t among the Travel Biz Boss lists imported into Travefy.</p>
+  </section>
+
+  <section class="listcard" id="mass-market">
+    <h2>Cruise Workflow - Mass Market 3/2/26 <span class="tag t-list">Task list</span></h2>
+    <p class="when">The booked-cruise workflow for mass market lines. Each item is checked against <a href="ttc.html#booked-all">TTC Booked - All Trips</a>.</p>
+    <p class="meta">35 items: 19 tasks, 16 automations</p>
+    <div class="ovsum">
+      <div><span class="ov ov-c">In All Trips</span><strong>11</strong><p>Already handled by All Trips. Skip these if both lists are on the trip.</p></div>
+      <div><span class="ov ov-p">Partly covered</span><strong>6</strong><p>Something similar exists in All Trips or TTC Planning, but the cruise version differs.</p></div>
+      <div><span class="ov ov-n">Cruise add-on</span><strong>18</strong><p>Nothing like it in All Trips. These are what a cruise needs on top.</p></div>
+    </div>
+    <details class="addon">
+      <summary>The 18 cruise add-on items</summary>
+      <ul><li>00. Add Cruise Line Specific Task List</li><li>02. Submit sale to host/log commission info</li><li>03. Cross-reference cabins for dining (if traveling with other guests)</li><li>06. Send Flight Reservation Access (if you booked their flights)</li><li>08. Add date and time to Online Check In Reminder to activate</li><li>Automatic Email Message - Accessing your flight reservation <span class="muted">(1 day before itinerary start date)</span></li><li>Automatic Email Message - Communication during your trip (information needed) <span class="muted">(90 days before itinerary start date)</span></li><li>If client booked their own air, request air info <span class="muted">(70 days before itinerary start date)</span></li><li>Automatic Email Message - Flight Information Needed For Your Upcoming Trip <span class="muted">(1 day before itinerary start date)</span></li><li>Reconfirm that all transfer pickup times match current flight times <span class="muted">(7 days before itinerary start date)</span></li><li>Automatic Itinerary Invite <span class="muted">(1 day before itinerary start date)</span></li><li>Automatic Email Message - 60 days and counting... <span class="muted">(60 days before itinerary start date)</span></li><li>Automatic Email Message - Travel Smart: Pre-Vacation Money Tips <span class="muted">(45 days before itinerary start date)</span></li><li>Automatic Email Message - Your Cruise: 30 Days and Counting... <span class="muted">(30 days before itinerary start date)</span></li><li>Automatic Email Message - Your Upcoming Vacation: Flight Check-In Reminder <span class="muted">(2 days before itinerary start date)</span></li><li>Automatic Itinerary Chat Message <span class="muted">(1 day after itinerary start date)</span></li><li>Automatic Email Message - Why should you book your next cruise while on board? <span class="muted">(10 days before itinerary start date)</span></li><li>Automatic Email Message - 6 Months Until Your Cruise Adventure! <span class="muted">(180 days before itinerary start date)</span></li></ul>
+    </details>
+    <ol class="steps">
+        <li>
+          <h3>00. Add Cruise Line Specific Task List <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span> Points to the cruise line lists below.</p>
+        </li>
+        <li>
+          <h3>01. Send receipt &amp; cruise is confirmed email <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Send email to client re: Deposit Paid or Booking Confirmed</p>
+        </li>
+        <li>
+          <h3>02. Submit sale to host/log commission info <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li>
+          <h3>03. Cross-reference cabins for dining (if traveling with other guests) <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li>
+          <h3>04. Schedule second payment reminder to be sent if not paid by 3 days out <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-p">Partly covered</span> Payment Due - schedule inactive automations (or click send now)</p>
+        </li>
+        <li>
+          <h3>05. Have you noted any medical, dietary needs, or special occasions, with the cruise line? <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-p">Partly covered</span> TTC Planning asks the question; noting it with the cruise line is the cruise-only part.</p>
+        </li>
+        <li>
+          <h3>06. Send Flight Reservation Access (if you booked their flights) <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li>
+          <h3>07. Send initial Insurance prompt (within 48 hours) if they didn&#x27;t already accept insurance <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Send Travel Insurance email (if applicable)</p>
+        </li>
+        <li>
+          <h3>08. Add date and time to Online Check In Reminder to activate <span class="tag t-manual">Task</span></h3>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li>
+          <h3>09. Send Paid In Full email once final payment has been processed. <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 1 day before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Automatic Email Message - You&#x27;re paid in full! Let the countdown begin</p>
+        </li>
+        <li>
+          <h3>Insurance prompt before final payment <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 120 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Automatic Email Message - Final payment due + protecting your trip</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Accessing your flight reservation <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Protect your cruise investment <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Automatic Email Message - Protect your trip investment</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Communication during your trip (information needed) <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 90 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li>
+          <h3>If client booked their own air, request air info <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 70 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Flight Information Needed For Your Upcoming Trip <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li>
+          <h3>Prepare documents <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 21 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Update itinerary with final documents (25 days before)</p>
+        </li>
+        <li>
+          <h3>Send final documents <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 14 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Automatic Email Message - Your Trip Details Are Ready (14 days before)</p>
+        </li>
+        <li>
+          <h3>Reconfirm that all transfer pickup times match current flight times <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 7 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span> Not in All Trips, but TTC Booked - Resort Stay has the same check.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Itinerary Invite <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - 60 days and counting... <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 60 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Travel Smart: Pre-Vacation Money Tips <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 45 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Your Cruise: 30 Days and Counting... <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 30 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Important: Visa Requirements for Your Upcoming Trip <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-p">Partly covered</span> TTC Planning sends Preparing for Your Journey: Entry &amp; Travel Requirements.</p>
+        </li>
+        <li>
+          <h3>Double entry requirements. Are any visas/ETAs required? <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 60 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-p">Partly covered</span> TTC Planning has Send entry &amp; visa email (if applicable).</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Ready, Set, Explore! Last-Minute Checklist for Your Trip <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 5 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-p">Partly covered</span> Closest match is Bon Voyage! (1 day before).</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Your Upcoming Vacation: Flight Check-In Reminder <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 2 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Itinerary Chat Message <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day after itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span> Not in All Trips; similar to the FIT Welcome: You have arrived email.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Reflecting on Your Trip - Your Feedback Matters <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 3 days after itinerary end date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Automatic Form - TTC Trip Survey (4 days after end)</p>
+        </li>
+        <li>
+          <h3>Add post-trip follow up workflow if you want to work with them again. <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 7 days after itinerary end date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Automatic Form - TTC Trip Request (180 days after end)</p>
+        </li>
+        <li>
+          <h3>Did commission come in? <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 60 days after itinerary end date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Matches: Commission Received? (55 days after end)</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Why should you book your next cruise while on board? <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 10 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - One last reminder to protect your cruise investment <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-p">Partly covered</span> All Trips covers insurance twice, but has no last-chance reminder.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - 6 Months Until Your Cruise Adventure! <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">Trigger in Travefy: 180 days before itinerary start date</p>
+          <p class="ovline"><span class="ov ov-n">Cruise add-on</span></p>
+        </li>
+        <li>
+          <h3>Did commission come in? <span class="tag t-manual">Task</span></h3>
+          <p class="trig">Due in Travefy: 60 days after itinerary end date</p>
+          <p class="ovline"><span class="ov ov-c">In All Trips</span> Duplicate of the item above in this list.</p>
+        </li>
+    </ol>
+  </section>
+
   <section class="sec" aria-labelledby="cl-h">
     <h2 id="cl-h">Deposit and final balance emails by cruise line</h2>
     <p>One list per cruise line, 24 in total, for the deposit and final balance emails on a booked cruise.</p>
