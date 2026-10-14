@@ -155,6 +155,18 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
 .listcard .when{margin:.4rem 0 1rem}
 .meta{color:var(--muted);font-size:.9rem;margin:-.5rem 0 1rem}
 .jump{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 0}
+
+.dests{margin:.15rem 0 .1rem !important;display:flex;flex-wrap:wrap;gap:.35rem}
+.dest{display:inline-block;font-size:.78rem;font-weight:600;padding:.1rem .5rem;border-radius:5px;white-space:nowrap}
+.d-tv{background:var(--sun-soft);color:var(--sun)}
+.d-tr{background:var(--lagoon-soft);color:var(--lagoon)}
+.d-sn{border:1.5px solid var(--sun);color:var(--sun)}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:.75rem;margin:0 0 1.25rem;max-width:46rem}
+.split div{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:1rem 1.15rem}
+.split h3{font-size:1.05rem;margin:0 0 .35rem}
+.split p{margin:0;font-size:.95rem;color:var(--muted)}
+.split strong{color:var(--ink)}
+.steps .muted{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -230,68 +242,105 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
   <section class="listcard" id="booked-all">
     <h2>TTC Booked - All Trips <span class="tag t-list">Task list</span></h2>
     <p class="when"><strong>When to add:</strong> Added to every trip once the deposit is paid, whatever the trip type. <a href="./#booked">See this step in the process</a></p>
-    <p class="meta">16 items: 9 tasks, 7 automations</p>
+    <p class="meta">17 items: 9 tasks, 8 automations</p>
+    <div class="split">
+      <div><h3>Stays in Travefy</h3><p>The 8 automations. Four of them have no date trigger (items 3, 4, 6 and 7), so they go out only when someone opens them in Travefy and chooses <strong>Send Now</strong>. The other four send on their own from the trip dates.</p></div>
+      <div><h3>Moves to the Trip Tracker</h3><p>The 9 tasks. Travefy can&#39;t keep tasks in order, so the <a href="https://claude.ai/artifact/5hj9iNKBRE8eKKa5Gdn5JS" target="_blank" rel="noopener">Trip Tracker</a> lists them in this order with due dates worked out from the trip dates. Each tracker task names the Travefy automation to send. The plan is to remove these tasks from the Travefy list once the tracker is in use.</p></div>
+    </div>
     <ol class="steps">
         <li>
           <h3>Send email to client re: Deposit Paid or Booking Confirmed <span class="tag t-manual">Task</span></h3>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
+          <p>Not automated. Send it yourself from Gmail or Travefy.</p>
         </li>
         <li>
-          <h3>Payment Due - schedule inactive automations (or click send now) <span class="tag t-manual">Task</span></h3>
-        </li>
-        <li>
-          <h3>Send Travel Insurance email (if applicable) <span class="tag t-manual">Task</span></h3>
+          <h3>Manual task - Payment(s) due - update with due dates <span class="tag t-manual">Task</span></h3>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
+          <p>Add each payment due date as a trip-specific task in the Trip Tracker. <span class="muted">Pairs with items 3, 4 and 7.</span></p>
         </li>
         <li class="auto">
-          <h3>Automatic Email Message - Protect your trip investment <span class="tag t-auto">Automation</span></h3>
-          <p>Inactive. Scheduled or sent now by Dana.</p>
+          <h3>Automatic Form - TTC Credit Card Authorization Form <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>No date trigger, so it only goes out when you open it in Travefy and choose Send Now. Send it when a card authorization is needed.</p>
         </li>
         <li class="auto">
           <h3>Automatic Email Message - Final payment due + protecting your trip <span class="tag t-auto">Automation</span></h3>
-          <p>Inactive. Scheduled for the payment due date or sent now by Dana.</p>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>No date trigger, so it only goes out when you open it in Travefy and choose Send Now. Send it ahead of the final payment due date.</p>
+        </li>
+        <li>
+          <h3>Send Travel Insurance email (if applicable) <span class="tag t-manual">Task</span></h3>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
+          <p>If insurance applies, open item 6 in Travefy and choose Send Now.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Protect your trip investment <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>No date trigger, so it only goes out when you open it in Travefy and choose Send Now.</p>
         </li>
         <li class="auto">
           <h3>Automatic Email Message - You&#x27;re paid in full! Let the countdown begin <span class="tag t-auto">Automation</span></h3>
-          <p>Inactive. Scheduled or sent now by Dana.</p>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>No date trigger, so it only goes out when you open it in Travefy and choose Send Now. Send it once the final payment clears.</p>
         </li>
         <li>
           <h3>Update itinerary with final documents <span class="tag t-manual">Task</span></h3>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
           <p class="trig">Due in Travefy: 25 days before itinerary start date</p>
+          <p>Finish before item 9 sends. <span class="muted">Before item 9.</span></p>
         </li>
         <li class="auto">
           <h3>Automatic Email Message - Your Trip Details Are Ready <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span></p>
           <p class="trig">Trigger in Travefy: 14 days before itinerary start date</p>
+          <p>Sends on its own.</p>
         </li>
         <li class="auto">
           <h3>Automatic Email Message - Bon Voyage! <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span></p>
           <p class="trig">Trigger in Travefy: 1 day before itinerary start date</p>
+          <p>Sends on its own.</p>
         </li>
         <li>
           <h3>Update Trip Status to Traveling <span class="tag t-manual">Task</span></h3>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
           <p class="trig">Due in Travefy: 1 day before itinerary start date</p>
+          <p>Change the status in Travefy.</p>
         </li>
         <li class="auto">
           <h3>Automatic Form - TTC Trip Survey <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span></p>
           <p class="trig">Trigger in Travefy: 4 days after itinerary end date</p>
+          <p>Sends on its own.</p>
         </li>
         <li>
           <h3>Review Trip feedback <span class="tag t-manual">Task</span></h3>
-          <p class="trig">Due in Travefy: 10 days before itinerary end date</p>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
+          <p class="trig">Due in Travefy: 5 days before itinerary end date</p>
+          <p>Reads the survey from item 12. As set, it comes due before the survey goes out; the Trip Tracker schedules it 5 days after the trip ends. <span class="muted">After item 12.</span></p>
         </li>
         <li>
           <h3>Update Trip Status to Traveled <span class="tag t-manual">Task</span></h3>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
           <p class="trig">Due in Travefy: 1 day after itinerary end date</p>
+          <p>Change the status in Travefy.</p>
         </li>
         <li class="auto">
           <h3>Automatic Form - TTC Trip Request <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span></p>
           <p class="trig">Trigger in Travefy: 180 days after itinerary end date</p>
+          <p>Sends on its own.</p>
         </li>
         <li>
           <h3>Commission Received? <span class="tag t-manual">Task</span></h3>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
           <p class="trig">Due in Travefy: 55 days after itinerary end date</p>
         </li>
         <li>
           <h3>Update Trip Status to Archived <span class="tag t-manual">Task</span></h3>
+          <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
           <p class="trig">Due in Travefy: 60 days after itinerary end date</p>
+          <p>Change the status in Travefy, then archive the trip in the Trip Tracker.</p>
         </li>
     </ol>
   </section>
@@ -341,6 +390,6 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
     </ol>
   </section>
 </main>
-<footer><div class="wrap">Trio Travel Company internal process guide. Last updated October 8, 2026. This is a living document and will change as the task lists are refined.</div></footer>
+<footer><div class="wrap">Trio Travel Company internal process guide. Last updated October 14, 2026. This is a living document and will change as the task lists are refined.</div></footer>
 </body>
 </html>
