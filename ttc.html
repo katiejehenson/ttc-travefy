@@ -14,21 +14,10 @@
   --sun:#B7861A; --sun-soft:#FBF1D9; --plum:#6B4E8C; --plum-soft:#EEE7F5;
   --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --body:"Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  color-scheme:light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
-    --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
-    --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
-  --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
-  --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
@@ -89,6 +78,9 @@ main{padding:2rem 0 4rem}
 ol.steps{counter-reset:s}
 ol.steps > li{counter-increment:s;position:relative;padding-left:3.1rem}
 ol.steps > li::before{content:counter(s);position:absolute;left:1.15rem;top:1rem;font-family:var(--display);font-weight:700;color:var(--muted)}
+.steps .linked{margin:.75rem 0 0;padding:.6rem .85rem;border:1.5px dashed var(--sun);border-radius:8px;background:var(--sun-soft)}
+.steps .linked h4{margin:0;font-size:1rem;font-weight:600;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem}
+.cwarn{color:#9A6F10;font-size:.92rem}
 .trig{color:var(--muted);font-size:.9rem;margin:.1rem 0 0 !important}
 .route ol::before{right:1.1rem !important}
 .route ol::after{display:none}
@@ -180,7 +172,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
       <span><span class="tag t-manual">Task</span> A to-do Dana completes</span>
       <span><span class="tag t-auto">Automation</span> A form, fee or email Travefy sends. Ones marked Inactive wait for Dana to set a send date or choose Send Now.</span>
     </div>
-    <nav class="jump" aria-label="Task lists"><a class="listchip" href="#trip-leads">TTC Trip Leads</a><a class="listchip" href="#planning">TTC Planning</a><a class="listchip" href="#booked-all">TTC Booked - All Trips</a><a class="listchip" href="#booked-fit">TTC Booked - FIT</a><a class="listchip" href="#booked-resort">TTC Booked - Resort Stay</a></nav>
+    <nav class="jump" aria-label="Task lists"><a class="listchip" href="#trip-leads">TTC Trip Leads</a><a class="listchip" href="#planning">TTC Quote</a><a class="listchip" href="#booked-all">TTC Booked - All Trips</a><a class="listchip" href="#booked-fit">TTC Booked - FIT</a><a class="listchip" href="#booked-resort">TTC Booked - Resort Stay</a><a class="listchip" href="#booked-cruise">TTC Booked - Cruise</a></nav>
   </div>
 </header>
 <main class="wrap">
@@ -207,18 +199,16 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
     </ol>
   </section>
   <section class="listcard" id="planning">
-    <h2>TTC Planning <span class="tag t-list">Task list</span></h2>
+    <h2>TTC Quote <span class="tag t-list">Task list</span></h2>
     <p class="when"><strong>When to add:</strong> Added once the agreement is signed and the planning fee is paid. <a href="./#planning">See this step in the process</a></p>
-    <p class="meta">8 items: 5 tasks, 3 automations</p>
+    <p class="meta">7 items: 4 tasks, 3 automations</p>
     <ol class="steps">
         <li>
           <h3>Proposal sent - Send Traveler profile form <span class="tag t-manual">Task</span></h3>
         </li>
         <li class="auto">
           <h3>Automatic Form - TTC Traveler Information Form with Passport Upload <span class="tag t-auto">Automation</span></h3>
-        </li>
-        <li>
-          <h3>Special occassions or medical requirements? <span class="tag t-manual">Task</span></h3>
+          <p>Also asks about special occasions and medical requirements.</p>
         </li>
         <li>
           <h3>Client confirms trip - Send cc authorization form <span class="tag t-manual">Task</span></h3>
@@ -254,9 +244,9 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
           <p>Not automated. Send it yourself from Gmail or Travefy.</p>
         </li>
         <li>
-          <h3>Manual task - Payment(s) due - update with due dates <span class="tag t-manual">Task</span></h3>
+          <h3>Payment schedule <span class="tag t-manual">Task</span></h3>
           <p class="dests"><span class="dest d-tr">Moves to Trip Tracker</span></p>
-          <p>Add each payment due date as a trip-specific task in the Trip Tracker. <span class="muted">Pairs with items 3, 4 and 7.</span></p>
+          <p>Add task in Travefy with payment schedule due dates. <span class="muted">Pairs with items 3, 4 and 7.</span></p>
         </li>
         <li class="auto">
           <h3>Automatic Form - TTC Credit Card Authorization Form <span class="tag t-auto">Automation</span></h3>
@@ -386,6 +376,117 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         <li>
           <h3>Confirm flight times still match transfer times <span class="tag t-manual">Task</span></h3>
           <p class="trig">Due in Travefy: 14 days before itinerary start date</p>
+        </li>
+    </ol>
+  </section>
+  <section class="listcard" id="booked-cruise">
+    <h2>TTC Booked - Cruise <span class="tag t-list">Task list</span></h2>
+    <p class="when"><strong>When to add:</strong> Added alongside All Trips for a cruise. Items already on All Trips are left off this list. <a href="./#booked">See this step in the process</a></p>
+    <p class="meta">16 numbered items: 10 tasks, 9 automations</p>
+    <h3 class="listname">After the deposit is paid</h3>
+    <ol class="steps" style="counter-reset:s 0">
+        <li>
+          <h3>Add Cruise Line Workflow <span class="tag t-manual">Task</span></h3>
+          <p class="trig">At booking</p>
+          <p>Add the cruise line specific workflow to the trip.</p>
+          <p>Workflow contains the cruise line deposit and final balance emails.</p>
+        </li>
+        <li>
+          <h3>Send receipt, invoice and cruise confirmed email (deposit email) <span class="tag t-manual">Task</span></h3>
+          <p class="trig">At booking</p>
+        </li>
+        <li>
+          <h3>Cross-reference cabins for dining (if traveling with other guests) <span class="tag t-manual">Task</span></h3>
+          <p class="trig">At booking</p>
+          <p>Check cabins so the group can dine together.</p>
+        </li>
+        <li>
+          <h3>Schedule second payment reminder <span class="tag t-manual">Task</span></h3>
+          <p class="trig">At booking</p>
+          <p>Set it to send if the client hasn&#x27;t paid by 3 days out.</p>
+        </li>
+        <li>
+          <h3>Note medical, dietary needs, or special occasions with the cruise line <span class="tag t-manual">Task</span></h3>
+          <p class="trig">At booking</p>
+          <p>Confirm these are on file with the cruise line.</p>
+        </li>
+        <li>
+          <h3>Send Flight Reservation Access (if you booked their flights) <span class="tag t-manual">Task</span></h3>
+          <p class="trig">At booking</p>
+          <p>Skip if the client booked their own air.</p>
+          <div class="linked">
+            <h4>Automatic Email Message - Accessing your flight reservation <span class="tag t-auto">Automation</span></h4>
+            <p class="trig">1 day before start</p>
+            <p>Sends on its own. Confirm it went out.</p>
+            <p class="cwarn">Travefy shows 1 day before start; check the send date is right.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Add date and time to Online Check In Reminder to activate <span class="tag t-manual">Task</span></h3>
+          <p class="trig">At booking</p>
+          <p>The reminder stays off until the date and time are set.</p>
+          <div class="linked">
+            <h4>Automatic Email Message - Your Upcoming Vacation: Flight Check-In Reminder <span class="tag t-auto">Automation</span></h4>
+            <p class="trig">2 days before start</p>
+            <p>Sends once activated. Confirm it went out.</p>
+          </div>
+        </li>
+    </ol>
+    <h3 class="listname">Before the trip</h3>
+    <ol class="steps" style="counter-reset:s 7">
+        <li class="auto">
+          <h3>Automatic Email Message - 6 Months Until Your Voyage <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">180 days before start</p>
+          <p>Sends on its own. Confirm it went out.</p>
+        </li>
+        <li>
+          <h3>If client booked their own air, request air info <span class="tag t-manual">Task</span></h3>
+          <p class="trig">70 days before start</p>
+          <p>Get flight details for transfers and timing.</p>
+          <div class="linked">
+            <h4>Automatic Email Message - Flight Information Needed For Your Upcoming Trip <span class="tag t-auto">Automation</span></h4>
+            <p class="trig">1 day before start</p>
+            <p>Sends on its own. Confirm it went out.</p>
+            <p class="cwarn">Travefy shows 1 day before start; check the send date is right.</p>
+          </div>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - 60 days and counting... <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">60 days before start</p>
+          <p>Sends on its own. Confirm it went out.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Travel Smart: Pre-Vacation Money Tips <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">45 days before start</p>
+          <p>Sends on its own. Confirm it went out.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Your Cruise: 30 Days and Counting... <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">30 days before start</p>
+          <p>Sends on its own. Confirm it went out.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Why should you book your next cruise while on board? <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">10 days before start</p>
+          <p>Sends on its own. Confirm it went out.</p>
+        </li>
+        <li>
+          <h3>Reconfirm that all transfer pickup times match current flight times <span class="tag t-manual">Task</span></h3>
+          <p class="trig">7 days before start</p>
+          <p>Update transfers if flight times have changed.</p>
+        </li>
+    </ol>
+    <h3 class="listname">Traveling and post-travel</h3>
+    <ol class="steps" style="counter-reset:s 14">
+        <li class="auto">
+          <h3>Automatic Itinerary Chat Message <span class="tag t-auto">Automation</span></h3>
+          <p class="trig">1 day after start</p>
+          <p>Sends on its own. Confirm it went out.</p>
+        </li>
+        <li>
+          <h3>Add post-trip follow-up workflow if you want to work with them again <span class="tag t-manual">Task</span></h3>
+          <p class="trig">7 days after end</p>
+          <p>Decide whether to keep working with the client.</p>
         </li>
     </ol>
   </section>
