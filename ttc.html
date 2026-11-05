@@ -172,7 +172,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
       <span><span class="tag t-manual">Task</span> A to-do Dana completes</span>
       <span><span class="tag t-auto">Automation</span> A form, fee or email Travefy sends. Ones marked Inactive wait for Dana to set a send date or choose Send Now.</span>
     </div>
-    <nav class="jump" aria-label="Task lists"><a class="listchip" href="#trip-leads">TTC Trip Leads</a><a class="listchip" href="#planning">TTC Quote</a><a class="listchip" href="#booked-all">TTC Booked - All Trips</a><a class="listchip" href="#booked-fit">TTC Booked - FIT</a><a class="listchip" href="#booked-resort">TTC Booked - Resort Stay</a><a class="listchip" href="#booked-cruise">TTC Booked - Cruise</a></nav>
+    <nav class="jump" aria-label="Task lists"><a class="listchip" href="#trip-leads">TTC Trip Leads</a><a class="listchip" href="#planning">TTC Quote</a><a class="listchip" href="#booked-all">TTC Booked - All Trips</a><a class="listchip" href="#booked-auto">03. TTC Booked - All Trips Automated Emails</a><a class="listchip" href="#booked-fit">TTC Booked - FIT</a><a class="listchip" href="#booked-resort">TTC Booked - Resort Stay</a><a class="listchip" href="#booked-cruise">TTC Booked - Cruise</a></nav>
   </div>
 </header>
 <main class="wrap">
@@ -232,9 +232,9 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
   <section class="listcard" id="booked-all">
     <h2>TTC Booked - All Trips <span class="tag t-list">Task list</span></h2>
     <p class="when"><strong>When to add:</strong> Added to every trip once the deposit is paid, whatever the trip type. <a href="./#booked">See this step in the process</a></p>
-    <p class="meta">17 items: 9 tasks, 8 automations</p>
+    <p class="meta">18 items: 9 tasks, 9 automations</p>
     <div class="split">
-      <div><h3>Stays in Travefy</h3><p>The 8 automations. Four of them have no date trigger (items 3, 4, 6 and 7), so they go out only when someone opens them in Travefy and chooses <strong>Send Now</strong>. The other four send on their own from the trip dates.</p></div>
+      <div><h3>Stays in Travefy</h3><p>The 9 automations. Five of them have no date trigger (items 3, 4, 6, 7 and 18), so they go out only when someone opens them in Travefy and chooses <strong>Send Now</strong>. The other four send on their own from the trip dates.</p></div>
       <div><h3>Moves to the Trip Tracker</h3><p>The 9 tasks. Travefy can&#39;t keep tasks in order, so the <a href="https://claude.ai/artifact/5hj9iNKBRE8eKKa5Gdn5JS" target="_blank" rel="noopener">Trip Tracker</a> lists them in this order with due dates worked out from the trip dates. Each tracker task names the Travefy automation to send. The plan is to remove these tasks from the Travefy list once the tracker is in use.</p></div>
     </div>
     <ol class="steps">
@@ -332,6 +332,83 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
           <p class="trig">Due in Travefy: 60 days after itinerary end date</p>
           <p>Change the status in Travefy, then archive the trip in the Trip Tracker.</p>
         </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Flight Information Needed For Your Upcoming Trip <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Optional. Send only if you need the client&#39;s flight details.</p>
+        </li>
+    </ol>
+  </section>
+  <section class="listcard" id="booked-auto">
+    <h2>03. TTC Booked - All Trips Automated Emails <span class="tag t-list">Task list</span></h2>
+    <p class="when"><strong>When to add:</strong> Added with TTC Booked - All Trips once the deposit is paid, whatever the trip type. <a href="./#booked">See this step in the process</a></p>
+    <p class="meta">12 items: 0 tasks, 12 automations</p>
+    <p>Eight have no date trigger, so they go out only when you open them in Travefy and choose <strong>Send Now</strong>. The other four send on their own from the trip dates.</p>
+    <ol class="steps">
+        <li class="auto">
+          <h3>Automatic Form - TTC Credit Card Authorization Form <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Send when a card authorization is needed.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Protect your trip investment <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Pairs with the All Trips task Send Travel Insurance email.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Preparing for Your Journey: Entry &amp; Travel Requirements <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Pairs with the All Trips task Send visa / entry and travel requirements email.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Final payment due + protecting your trip <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Pairs with the All Trips task Payment schedule. Send ahead of the final payment due date.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Accessing your flight reservation <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Optional. Send if you booked the client&#x27;s flights.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - You&#x27;re paid in full! Let the countdown begin <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Send once the final payment clears.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Your Trip Details Are Ready <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span></p>
+          <p class="trig">Trigger in Travefy: 14 days before itinerary start date</p>
+          <p>Sends on its own.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Bon Voyage! <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span></p>
+          <p class="trig">Trigger in Travefy: 2 days before itinerary start date</p>
+          <p>Sends on its own.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - TTC Trip Survey <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span></p>
+          <p class="trig">Trigger in Travefy: 4 days after itinerary end date</p>
+          <p>Sends on its own.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Form - TTC Trip Request <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span></p>
+          <p class="trig">Trigger in Travefy: 180 days after itinerary end date</p>
+          <p>Sends on its own.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Itinerary Invite <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Pairs with the All Trips task Update itinerary with final documents. Send once the itinerary is ready to share.</p>
+        </li>
+        <li class="auto">
+          <h3>Automatic Email Message - Flight Information Needed For Your Upcoming Trip <span class="tag t-auto">Automation</span></h3>
+          <p class="dests"><span class="dest d-tv">Stays in Travefy</span> <span class="dest d-sn">Send Now</span></p>
+          <p>Optional. Send if the client booked their own air.</p>
+        </li>
     </ol>
   </section>
   <section class="listcard" id="booked-fit">
@@ -364,7 +441,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
   <section class="listcard" id="booked-resort">
     <h2>TTC Booked - Resort Stay <span class="tag t-list">Task list</span></h2>
     <p class="when"><strong>When to add:</strong> Added alongside All Trips for a resort or all-inclusive stay. <a href="./#booked">See this step in the process</a></p>
-    <p class="meta">3 items: 3 tasks, 0 automations</p>
+    <p class="meta">4 items: 4 tasks, 0 automations</p>
     <ol class="steps">
         <li>
           <h3>Confirm air seats at airline website <span class="tag t-manual">Task</span></h3>
@@ -377,12 +454,15 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
           <h3>Confirm flight times still match transfer times <span class="tag t-manual">Task</span></h3>
           <p class="trig">Due in Travefy: 14 days before itinerary start date</p>
         </li>
+        <li>
+          <h3>Check for Premium All-Inclusive amenities <span class="tag t-manual">Task</span></h3>
+        </li>
     </ol>
   </section>
   <section class="listcard" id="booked-cruise">
     <h2>TTC Booked - Cruise <span class="tag t-list">Task list</span></h2>
     <p class="when"><strong>When to add:</strong> Added alongside All Trips for a cruise. Items already on All Trips are left off this list. <a href="./#booked">See this step in the process</a></p>
-    <p class="meta">16 numbered items: 10 tasks, 9 automations</p>
+    <p class="meta">14 numbered items: 8 tasks, 7 automations</p>
     <h3 class="listname">After the deposit is paid</h3>
     <ol class="steps" style="counter-reset:s 0">
         <li>
@@ -411,17 +491,6 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
           <p>Confirm these are on file with the cruise line.</p>
         </li>
         <li>
-          <h3>Send Flight Reservation Access (if you booked their flights) <span class="tag t-manual">Task</span></h3>
-          <p class="trig">At booking</p>
-          <p>Skip if the client booked their own air.</p>
-          <div class="linked">
-            <h4>Automatic Email Message - Accessing your flight reservation <span class="tag t-auto">Automation</span></h4>
-            <p class="trig">1 day before start</p>
-            <p>Sends on its own. Confirm it went out.</p>
-            <p class="cwarn">Travefy shows 1 day before start; check the send date is right.</p>
-          </div>
-        </li>
-        <li>
           <h3>Add date and time to Online Check In Reminder to activate <span class="tag t-manual">Task</span></h3>
           <p class="trig">At booking</p>
           <p>The reminder stays off until the date and time are set.</p>
@@ -433,22 +502,11 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         </li>
     </ol>
     <h3 class="listname">Before the trip</h3>
-    <ol class="steps" style="counter-reset:s 7">
+    <ol class="steps" style="counter-reset:s 6">
         <li class="auto">
           <h3>Automatic Email Message - 6 Months Until Your Voyage <span class="tag t-auto">Automation</span></h3>
           <p class="trig">180 days before start</p>
           <p>Sends on its own. Confirm it went out.</p>
-        </li>
-        <li>
-          <h3>If client booked their own air, request air info <span class="tag t-manual">Task</span></h3>
-          <p class="trig">70 days before start</p>
-          <p>Get flight details for transfers and timing.</p>
-          <div class="linked">
-            <h4>Automatic Email Message - Flight Information Needed For Your Upcoming Trip <span class="tag t-auto">Automation</span></h4>
-            <p class="trig">1 day before start</p>
-            <p>Sends on its own. Confirm it went out.</p>
-            <p class="cwarn">Travefy shows 1 day before start; check the send date is right.</p>
-          </div>
         </li>
         <li class="auto">
           <h3>Automatic Email Message - 60 days and counting... <span class="tag t-auto">Automation</span></h3>
@@ -477,7 +535,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         </li>
     </ol>
     <h3 class="listname">Traveling and post-travel</h3>
-    <ol class="steps" style="counter-reset:s 14">
+    <ol class="steps" style="counter-reset:s 12">
         <li class="auto">
           <h3>Automatic Itinerary Chat Message <span class="tag t-auto">Automation</span></h3>
           <p class="trig">1 day after start</p>
