@@ -14,21 +14,10 @@
   --sun:#B7861A; --sun-soft:#FBF1D9; --plum:#6B4E8C; --plum-soft:#EEE7F5;
   --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --body:"Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  color-scheme:light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
-    --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
-    --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#0F1826; --surface:#16233A; --ink:#E7EDF2; --muted:#9FB0C0;
-  --rule:#2A3A52; --lagoon:#5FC0D2; --lagoon-soft:#173B47;
-  --sun:#E9BE5A; --sun-soft:#3A3120; --plum:#B9A0D8; --plum-soft:#2E2640;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
@@ -213,7 +202,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
     <div class="body">
       <h2>Planning</h2>
       <p class="when"><strong>Starts when</strong> the agreement is signed and the planning fee is paid.</p>
-      <div class="apply"><a class="listchip" href="ttc.html#planning">Add: TTC Planning</a></div>
+      <div class="apply"><a class="listchip" href="ttc.html#planning">Add: TTC Quote</a></div>
       <ul class="do">
         <li>Once the proposal is sent, collect traveler details with the traveler information form and passport upload.</li>
         <li>Check for special occasions or medical requirements.</li>
@@ -233,6 +222,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
       <div class="choose">
         <div><h3>FIT</h3><a class="listchip" href="ttc.html#booked-fit">TTC Booked - FIT</a><p>Supplier paperwork, hotel confirmations and an arrival welcome email.</p></div>
         <div><h3>Resort or all-inclusive</h3><a class="listchip" href="ttc.html#booked-resort">TTC Booked - Resort Stay</a><p>Air seats, reservation amenities and flight-to-transfer timing.</p></div>
+        <div><h3>Cruise</h3><a class="listchip" href="ttc.html#booked-cruise">TTC Booked - Cruise</a><p>Cruise line workflow, deposit email, cabins, flights and the cruise countdown emails.</p></div>
         <div><h3>Cruise</h3><p style="margin-top:0">No TTC cruise list yet. The cruise lists from Travel Biz Boss are on <a href="tbb.html">their own page</a>.</p></div>
       </div>
       <ul class="do">
@@ -281,8 +271,8 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         <thead><tr><th scope="col">Area</th><th scope="col">In Tern</th><th scope="col">In Travefy</th></tr></thead>
         <tbody>
           <tr><td>New vs existing clients</td><td>Separate workflows for new and existing clients.</td><td>One set of lists for everyone. Travefy can&#39;t auto-apply task lists, so splitting them adds work without a benefit.</td></tr>
-          <tr><td>Before booking</td><td>Longer lead workflow with numbered steps.</td><td>Two short lists, TTC Trip Leads and TTC Planning, mixing tasks with automations.</td></tr>
-          <tr><td>Visa and health notice</td><td>Sent as part of the workflow.</td><td>An automation in TTC Planning, sent at Dana&#39;s discretion.</td></tr>
+          <tr><td>Before booking</td><td>Longer lead workflow with numbered steps.</td><td>Two short lists, TTC Trip Leads and TTC Quote, mixing tasks with automations.</td></tr>
+          <tr><td>Visa and health notice</td><td>Sent as part of the workflow.</td><td>An automation in TTC Quote, sent at Dana&#39;s discretion.</td></tr>
           <tr><td>Booked trips</td><td>Long pre and post-travel task list.</td><td>One list for every trip, TTC Booked - All Trips, plus a short add-on list for FIT or resort stays.</td></tr>
         </tbody>
       </table>
