@@ -144,6 +144,25 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
 .listcard .when{margin:.4rem 0 1rem}
 .meta{color:var(--muted);font-size:.9rem;margin:-.5rem 0 1rem}
 .jump{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 0}
+.video{background:var(--surface);border:1px solid var(--rule);border-left:6px solid var(--lagoon);border-radius:12px;padding:1.5rem 1.75rem;margin:2.5rem 0 1rem}
+.video h2{margin:0 0 .5rem}
+.video p{margin:.5rem 0}
+.video ul{margin:.4rem 0 1rem;padding-left:1.2rem}
+.video li{margin:.3rem 0}
+.video h3{font-size:1.05rem;margin:1.1rem 0 .25rem}
+.watch{display:inline-block;margin:.5rem 0 .75rem;padding:.6rem 1.1rem;border-radius:8px;background:var(--lagoon);color:#fff;font-weight:600;text-decoration:none}
+.watch:hover,.watch:focus{text-decoration:underline}
+.stagetools{display:flex;gap:.5rem;flex-wrap:wrap;margin:0 0 1.5rem}
+.stagetools button{font:inherit;font-size:.9rem;font-weight:600;padding:.4rem .9rem;border-radius:8px;border:1.5px solid var(--lagoon);background:transparent;color:var(--lagoon);cursor:pointer}
+.stagetools button:hover,.stagetools button:focus-visible{background:var(--lagoon-soft)}
+details.body>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.75rem;min-height:4.5rem}
+details.body>summary::-webkit-details-marker{display:none}
+details.body>summary h2{margin:0}
+details.body>summary::after{content:"";flex:none;width:.65rem;height:.65rem;border-right:3px solid var(--lagoon);border-bottom:3px solid var(--lagoon);transform:rotate(45deg);margin-top:-.35rem;transition:transform .15s}
+details.body[open]>summary::after{transform:rotate(-135deg);margin-top:.35rem}
+details.body>summary:focus-visible{outline:3px solid var(--lagoon);outline-offset:4px;border-radius:6px}
+.stage:has(details.body:not([open])){padding-bottom:1.5rem}
+@media print{details.body>summary::after,.stagetools{display:none}}
 </style>
 </head>
 <body>
@@ -169,10 +188,34 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
 
 <main class="wrap">
 
+  <section class="video" id="walkthrough" aria-labelledby="walkthrough-h">
+    <h2 id="walkthrough-h">Watch the walkthrough</h2>
+    <p>This short video walks through how trip operations now run in Travefy: the task list for each trip type, the automated emails that go with them, and how this hub ties it all together.</p>
+    <a class="watch" href="https://drive.google.com/file/d/1zEhpK2o-Cjn198BSGp4Vq2GMNSxv8puE/view?usp=drive_link" target="_blank" rel="noopener">Watch the video</a>
+    <h3>What it covers</h3>
+    <ul>
+      <li><strong>Task lists for each trip type:</strong> All Trips, FIT, Resort Stay, and the River, Premium/Lux and Mass Market cruise workflows.</li>
+      <li><strong>Lightweight task lists paired with automations,</strong> so each task works as a reminder while you set up and run the trip.</li>
+      <li><strong>Automated emails for each trip milestone:</strong> deposit paid or booking confirmed, paid in full, trip details ready, itinerary invite, and the traveler information form with passport upload.</li>
+      <li><strong>Hub navigation</strong> that follows the process from inbound lead through recap and planning, with links to every task list.</li>
+    </ul>
+    <h3>Good to know</h3>
+    <ul>
+      <li>Some task lists are intentionally minimal and may be removed if they aren&#39;t needed in practice.</li>
+      <li>The cruise workflows are used alongside each cruise line&#39;s own workflow, which will be added separately.</li>
+      <li>This hub and the PDF checklists will keep changing as the process is refined after review.</li>
+    </ul>
+  </section>
+
+  <div class="stagetools" role="group" aria-label="Show or hide stage details">
+    <button type="button" data-stages="open">Expand all stages</button>
+    <button type="button" data-stages="close">Collapse all stages</button>
+  </div>
+
   <section class="stage" id="lead">
     <div class="num" aria-hidden="true">1</div>
-    <div class="body">
-      <h2>Inbound lead</h2>
+    <details class="body">
+      <summary><h2>Inbound lead</h2></summary>
       <p class="when"><strong>Starts when</strong> a new inquiry comes in.</p>
       <div class="apply"><a class="listchip" href="ttc.html#trip-leads">Add: TTC Trip Leads</a></div>
       <ul class="do">
@@ -180,13 +223,13 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         <li>Dana holds the consultation call and saves her notes on the contact record.</li>
       </ul>
       <p class="next"><strong>Moves on when</strong> the consultation call is complete.</p>
-    </div>
+    </details>
   </section>
 
   <section class="stage" id="trip-leads">
     <div class="num" aria-hidden="true">2</div>
-    <div class="body">
-      <h2>Recap, agreement and planning fee</h2>
+    <details class="body">
+      <summary><h2>Recap, agreement and planning fee</h2></summary>
       <p class="when"><strong>Starts when</strong> the consultation call is complete. Work through TTC Trip Leads.</p>
       <ul class="do">
         <li>Send the recap email. Copy the notes from the contact record, or photograph handwritten notes and use an AI tool to draft it. Send from Gmail or Travefy; both use Dana&#39;s email.</li>
@@ -194,13 +237,13 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
       </ul>
       <p class="note warn">The fee amount is blank on purpose. Dana enters the amount agreed on the call.</p>
       <p class="next" style="margin-top:1rem"><strong>Moves on when</strong> the signed agreement and the paid fee both show in Travefy.</p>
-    </div>
+    </details>
   </section>
 
   <section class="stage" id="planning">
     <div class="num" aria-hidden="true">3</div>
-    <div class="body">
-      <h2>Planning</h2>
+    <details class="body">
+      <summary><h2>Planning</h2></summary>
       <p class="when"><strong>Starts when</strong> the agreement is signed and the planning fee is paid.</p>
       <div class="apply"><a class="listchip" href="ttc.html#planning">Add: TTC Quote</a></div>
       <ul class="do">
@@ -209,13 +252,13 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         <li>When the client confirms, send the credit card authorization form and, if it applies, the entry and travel requirements email. The client uses the Sherpa link in it to check their destination.</li>
       </ul>
       <p class="next"><strong>Moves on when</strong> the client pays a deposit. Move the trip to Booked.</p>
-    </div>
+    </details>
   </section>
 
   <section class="stage" id="booked">
     <div class="num" aria-hidden="true">4</div>
-    <div class="body">
-      <h2>Booked</h2>
+    <details class="body">
+      <summary><h2>Booked</h2></summary>
       <p class="when"><strong>Starts when</strong> the deposit is paid and the trip is moved to Booked.</p>
       <div class="apply"><a class="listchip" href="ttc.html#booked-all">Add: TTC Booked - All Trips</a> <a class="listchip" href="ttc.html#booked-auto">Add: 03. TTC Booked - All Trips Automated Emails</a></div>
       <p class="listname" style="font-size:1rem">Then add the list for the trip type:</p>
@@ -231,13 +274,13 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         <li>Send the travel insurance email if it applies.</li>
       </ul>
       <p class="next"><strong>From here</strong> the dated tasks and emails run on the timeline below.</p>
-    </div>
+    </details>
   </section>
 
   <section class="stage" id="post">
     <div class="num" aria-hidden="true">5</div>
-    <div class="body">
-      <h2>Countdown, travel and after</h2>
+    <details class="body">
+      <summary><h2>Countdown, travel and after</h2></summary>
       <p class="when">Every dated item from the Booked lists, laid out against the trip. The tag shows which list it comes from; FIT and Resort Stay items only appear when that list is added.</p>
       <ol class="timeline">
         <li><span class="tl-when">90 days before</span><span class="tl-what">Let&#x27;s Finalize the Details for Your Trip email <span class="tag t-auto">Automation</span></span><span class="tl-ref"><span class="src">FIT</span></span></li>
@@ -260,7 +303,7 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
         <li><span class="tl-when">60 days after end</span><span class="tl-what">Update trip status to Archived <span class="tag t-manual">Task</span></span><span class="tl-ref"><span class="src">All Trips</span></span></li>
         <li><span class="tl-when">180 days after end</span><span class="tl-what">TTC Trip Request form <span class="tag t-auto">Automation</span></span><span class="tl-ref"><span class="src">All Trips</span></span></li>
       </ol>
-    </div>
+    </details>
   </section>
 
   <section class="migrate" aria-labelledby="mig-h">
@@ -287,5 +330,22 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
 
 </main>
 <footer><div class="wrap">Trio Travel Company internal process guide. Last updated October 8, 2026. This is a living document and will change as the task lists are refined.</div></footer>
+<script>
+(function(){
+  var all=function(){return document.querySelectorAll('details.body');};
+  function openHash(){
+    var id=location.hash.slice(1); if(!id) return;
+    var el=document.getElementById(id); if(!el) return;
+    var d=el.matches('details')?el:(el.querySelector('details.body')||el.closest('details.body'));
+    if(d){d.open=true; el.scrollIntoView();}
+  }
+  document.querySelectorAll('[data-stages]').forEach(function(b){
+    b.addEventListener('click',function(){var o=b.getAttribute('data-stages')==='open';all().forEach(function(d){d.open=o;});});
+  });
+  window.addEventListener('hashchange',openHash);
+  window.addEventListener('beforeprint',function(){all().forEach(function(d){d.open=true;});});
+  openHash();
+})();
+</script>
 </body>
 </html>
